@@ -6,6 +6,8 @@ import com.example.tutorate.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,4 +52,23 @@ public class TutorServiceImpl implements TutorService{
         }
         return searched_tutor;
     }
+
+    /*
+    * Check if user is authenticated
+    * */
+
+    @Override
+    public boolean sessionCheck(HttpServletRequest request){
+        HttpSession session =request.getSession();
+        if(session.getAttribute("Session token")==null){
+            return false;
+        }
+        if(session.getAttribute("Session token").equals(request.getSession())){
+            return true;
+        }
+        else
+            return false;
+
+    }
+
 }

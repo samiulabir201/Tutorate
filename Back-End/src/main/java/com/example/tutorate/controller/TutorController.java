@@ -2,6 +2,7 @@ package com.example.tutorate.controller;
 
 import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
+import com.example.tutorate.repository.TutorRepository;
 import com.example.tutorate.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import java.util.List;
 public class TutorController {
     @Autowired
     private TutorService tutorService;
+    @Autowired
+    private TutorRepository tutorRepository;
 
     @PostMapping("/add")
     public String add(@RequestBody Tutor tutor) {
@@ -27,11 +30,35 @@ public class TutorController {
     * */
     @PostMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam("searchTerm") String searchTerm, @RequestBody SearchParams searchParams, HttpServletRequest request) {
-        HttpSession session=request.getSession();
-        if(session.getAttribute("Session token").equals(request.getSession()))
+
+       if(tutorService.sessionCheck(request))
         return tutorService.getTutors(searchTerm, searchParams);
         else
             return null;
     }
+    /*Get homepage showing all the tutors available, from this information we choose which
+    info to show in front end(clickable links)
+    * */
+    @GetMapping("/home")
+    public List<Tutor>HomePage(HttpServletRequest request){
+        if(tutorService.sessionCheck(request)!=false)
+        return tutorRepository.findAll();
+        else
+            return null;
+    }
+    /*
+    * Provides detail of user logged in
+    * */
+    @GetMapping("/profile")
+    public Tutor getProfileOfUser(HttpServletRequest request){
+        if(tutorService.sessionCheck(request)==false)
+            return null;
+        
+            HttpSession session=request.getSession();
+            int userId= (int) session.getAttribute("Session id");
+            Tutor user=tutorRepository.findById(userId);
+            return user;
+    }
+
 
 }

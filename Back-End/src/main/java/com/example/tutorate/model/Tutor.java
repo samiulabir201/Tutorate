@@ -1,9 +1,9 @@
 package com.example.tutorate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Tutor {
@@ -13,6 +13,11 @@ public class Tutor {
     private String name;
     private String password;
     private int min_wage;
+    /*
+    * Element collection enables subjects to be stored in another table according to id but can be
+    * called with Tutor itself*/
+    @ElementCollection
+    private List<String> subjects;
   
     public Tutor() {}
 
@@ -46,5 +51,13 @@ public class Tutor {
 
     public void setMin_wage(int min_wage) {
         this.min_wage = min_wage;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
     }
 }
