@@ -1,0 +1,33 @@
+.AdvancedSearch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+
+    border: 2px solid #1f252d;
+    border-radius: 10px;
+}
+
+.AdvancedSearchOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(30, 30, 30, 0.8);
+}
+
+.AdvancedSearch .optionsContainer {
+    width: 350px;
+    height: 460px;
+    margin: auto;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    background-color: white;
+}

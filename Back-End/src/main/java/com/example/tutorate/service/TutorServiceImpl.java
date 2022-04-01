@@ -1,5 +1,6 @@
 package com.example.tutorate.service;
 
+import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,14 @@ public class TutorServiceImpl implements TutorService{
     }
 
     @Override
-    public List<Tutor> getTutors(String searchTerm) {
+    public List<Tutor> getTutors(String searchTerm, SearchParams searchParams) {
+        int maxWage = searchParams.getWages() != null? searchParams.getWages()[1] : 100000;
+        String[] subjects = searchParams.getSubjects();
         searchTerm = searchTerm.toLowerCase();
         List<Tutor> tutors = new ArrayList<>();
         for (Tutor tutor: tutorRepository.findAll()) {
             String tutorName = tutor.getName().toLowerCase();
+            if (tutor.getMin_wage() > maxWage)  continue;
             if (tutorName.startsWith(searchTerm))   tutors.add(tutor);
         }
         return tutors;

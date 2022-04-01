@@ -1,5 +1,6 @@
 package com.example.tutorate.controller;
 
+import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +19,19 @@ public class TutorController {
     @PostMapping("/add")
     public String add(@RequestBody Tutor tutor) {
         tutorService.saveTutor(tutor);
-
         return "New tutor added";
     }
+  
     /*
     * Checks if session token matches with request.getsession()
     * */
-    @GetMapping("/getTutors")
-    public List<Tutor> getTutors(@RequestParam("searchTerm") String searchTerm, HttpServletRequest request) {
-         System.out.println(request.getSession());
-
+    @PostMapping("/getTutors")
+    public List<Tutor> getTutors(@RequestParam("searchTerm") String searchTerm, @RequestBody SearchParams searchParams, HttpServletRequest request) {
         HttpSession session=request.getSession();
         if(session.getAttribute("Session token").equals(request.getSession()))
-        return tutorService.getTutors(searchTerm);
+        return tutorService.getTutors(searchTerm, searchParams);
         else
             return null;
     }
-
-    @GetMapping("/getElse")
-    public List<Tutor> getElse(@RequestParam("searchTerm") String searchTerm, HttpServletRequest request) {
-        System.out.println(request.getSession());
-        HttpSession session=request.getSession();
-        System.out.println(session.getAttribute("Session id"));
-
-        return tutorService.getTutors(searchTerm);
-    }
-
-
-
-
 
 }

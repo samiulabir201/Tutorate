@@ -6,7 +6,7 @@ import { AdvancedSearch } from './AdvancedSearch';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export const Search = () => {
-  const { setSearchTerm, setAdvancedSearch, searchParams, setSearchParams } = useStateContext();
+  const { setSearchTerm, setAdvancedSearch } = useStateContext();
   const [text, setText] = useState('');
   const [debouncedValue] = useDebounce(text, 300);
 
@@ -31,7 +31,7 @@ export const Search = () => {
       <button type="button" onClick={() => setAdvancedSearch(true)}>
         <i className="bi bi-funnel" />
       </button>
-      <AdvancedSearch searchParams={searchParams} setSearchParams={setSearchParams} />
+      <AdvancedSearch />
     </div>
   );
 };
