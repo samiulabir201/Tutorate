@@ -9,19 +9,26 @@ export const StateContextProvider = ({ children }) => {
   const [searchParams, setSearchParams] = useState({});
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
-  // eslint-disable-next-line no-shadow
-  const getResults = async (searchTerm) => {
+  // eslint-disable-next-line no-shadow,no-use-before-define
+  const getResults = async (searchTerm, params = { searchParams }) => {
     setLoading(true);
 
     const res = await fetch(`http://localhost:8080/tutor/getTutors?searchTerm=${searchTerm}`, {
-      method: 'GET',
+      method: 'POST',
       credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
     });
 
     const data = await res.json();
 
     setResults(data);
     setLoading(false);
+  };
+
+  const setNewSearchParams = (newParams) => {
+    setSearchParams(newParams);
+    getResults(searchTerm, newParams);
   };
 
   return (
@@ -34,7 +41,7 @@ export const StateContextProvider = ({ children }) => {
       advancedSearch,
       setAdvancedSearch,
       searchParams,
-      setSearchParams }}
+      setNewSearchParams }}
     >
       {children}
     </StateContext.Provider>
