@@ -53,12 +53,25 @@ public class TutorController {
     public Tutor getProfileOfUser(HttpServletRequest request){
         if(tutorService.sessionCheck(request)==false)
             return null;
-        
             HttpSession session=request.getSession();
             int userId= (int) session.getAttribute("Session id");
             Tutor user=tutorRepository.findById(userId);
             return user;
     }
+    /*
+    * details of tutor selected requested parameter is Tutor object to make it easy to
+    * remember what we are passing for each get
+    * */
+    @GetMapping("/tutordetail")
+        public Tutor getTutorDetail(@RequestBody Tutor tutor,HttpServletRequest request){
+
+        if(tutorService.sessionCheck((request))==false)
+            return null;
+        Tutor selectedTutor=tutorRepository.findById(tutor.getId());
+            return selectedTutor;
+    }
+
+
 
 
 }
