@@ -29,4 +29,21 @@ public class TutorServiceImpl implements TutorService{
         }
         return tutors;
     }
+    /*
+    * Checks if any entry in database has name equal to name entered
+    * */
+    @Override
+    public  Tutor getTutorByName(String username){
+        System.out.println("Username "+username);
+        Tutor searched_tutor=new Tutor();
+        searched_tutor.setName("never");
+        for(Tutor tutor:tutorRepository.findAll()){
+        String tutorName=tutor.getName();
+        if(tutorName.equals(username)){
+            searched_tutor=tutor;
+            return searched_tutor;
+        }
+        }
+        return searched_tutor;
+    }
 }
