@@ -41,10 +41,9 @@ public class TutorController {
     * */
     @GetMapping("/home")
     public List<Tutor>HomePage(HttpServletRequest request){
-        if(tutorService.sessionCheck(request)!=false)
+
         return tutorRepository.findAll();
-        else
-            return null;
+
     }
     /*
     * Provides detail of user logged in
@@ -65,8 +64,6 @@ public class TutorController {
     @GetMapping("/tutordetail")
         public Tutor getTutorDetail(@RequestBody Tutor tutor,HttpServletRequest request){
 
-//        if(tutorService.sessionCheck((request))==false)
-//            return null;
         Tutor selectedTutor=tutorRepository.findById(tutor.getId());
             return selectedTutor;
     }

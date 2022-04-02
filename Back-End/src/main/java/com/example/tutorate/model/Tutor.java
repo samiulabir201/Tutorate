@@ -13,7 +13,7 @@ public class Tutor {
     private String name;
     private String password;
     private int min_wage;
-  
+
     /*
     * Element collection enables subjects to be stored in another table according to id but can be
     * called with Tutor itself*/
@@ -62,11 +62,5 @@ public class Tutor {
         this.subjects = subjects;
     }
 
-    public int getRole() {
-        return role;
-    }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
 }
