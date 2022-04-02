@@ -52,7 +52,7 @@ public class TutorServiceImpl implements TutorService{
         for (Tutor tutor: tutorRepository.findAll()) {
             String tutorName = tutor.getName().toLowerCase();
             if (tutor.getMin_wage() > maxWage)  continue;
-            if (subjects.length != 0 && Collections.disjoint(List.of(subjects), getTutorSubjects(tutor.getId())))
+            if (subjects != null && Collections.disjoint(List.of(subjects), getTutorSubjects(tutor.getId())))
                 continue;
             if (tutorName.startsWith(searchTerm))   tutors.add(tutor);
         }
