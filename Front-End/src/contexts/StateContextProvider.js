@@ -10,7 +10,7 @@ export const StateContextProvider = ({ children }) => {
   const [advancedSearch, setAdvancedSearch] = useState(false);
 
   // eslint-disable-next-line no-shadow,no-use-before-define
-  const getResults = async (searchTerm, params = { searchParams }) => {
+  const getResults = async (searchTerm, params = searchParams) => {
     setLoading(true);
 
     const res = await fetch(`http://localhost:8080/tutor/getTutors?searchTerm=${searchTerm}`, {
