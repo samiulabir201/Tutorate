@@ -65,8 +65,8 @@ public class TutorController {
     @GetMapping("/tutordetail")
         public Tutor getTutorDetail(@RequestBody Tutor tutor,HttpServletRequest request){
 
-        if(tutorService.sessionCheck((request))==false)
-            return null;
+//        if(tutorService.sessionCheck((request))==false)
+//            return null;
         Tutor selectedTutor=tutorRepository.findById(tutor.getId());
             return selectedTutor;
     }
