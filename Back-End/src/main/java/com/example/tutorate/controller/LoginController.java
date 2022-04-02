@@ -41,9 +41,11 @@ public class LoginController {
             if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
             {
                 HttpSession session=request.getSession();
+                //What session information we are going to add
                 session.setAttribute("Session id",matchedTutor.getId());
                 session.setAttribute("Session token",request.getSession());
                 session.setAttribute("Session name",matchedTutor.getName());
+                session.setAttribute("Session role",matchedTutor.getRole());
                 System.out.println("Authenticated");
                 return "Authenticated";
             }

@@ -18,7 +18,10 @@ public class TutorController {
     private TutorService tutorService;
     @Autowired
     private TutorRepository tutorRepository;
-
+    enum Role{
+        tutor,
+        student
+    }
     @PostMapping("/add")
     public String add(@RequestBody Tutor tutor) {
         tutorService.saveTutor(tutor);
@@ -47,6 +50,9 @@ public class TutorController {
     }
     /*
     * Provides detail of user logged in
+    * user type can be distinguished according to role of logged user
+    * user can be student type or tutor type
+    * I've used enum to identify role
     * */
     @GetMapping("/profile")
     public Tutor getProfileOfUser(HttpServletRequest request){
@@ -54,8 +60,13 @@ public class TutorController {
             return null;
             HttpSession session=request.getSession();
             int userId= (int) session.getAttribute("Session id");
-            Tutor user=tutorRepository.findById(userId);
-            return user;
+            int role= (int) session.getAttribute("Session role");
+            if(role==Role.tutor.ordinal())
+            {
+                Tutor user=tutorRepository.findById(userId);
+                return user;
+            }
+            return null;
     }
     /*
     * details of tutor selected requested parameter is Tutor object to make it easy to
