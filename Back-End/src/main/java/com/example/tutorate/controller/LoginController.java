@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
-@RequestMapping("/tutor")
+@RequestMapping("/user")
 public class LoginController {
     @Autowired
     private TutorService tutorService;
@@ -32,32 +34,35 @@ public class LoginController {
     * Username has to be unique
     *
     * */
-    public String login(@RequestBody Tutor tutor, HttpServletRequest request)
+    public int login(@RequestBody Map<String, String> json, HttpServletRequest request)
     {
-
-
-        if(tutorService.getTutorByName(tutor.getName())!=null){
-            Tutor matchedTutor=tutorService.getTutorByName(tutor.getName());
-            if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
-            {
-                HttpSession session=request.getSession();
-                session.setAttribute("Session id",matchedTutor.getId());
-                session.setAttribute("Session token",request.getSession());
-                session.setAttribute("Session name",matchedTutor.getName());
-                System.out.println("Authenticated");
-                return "Authenticated";
-            }
-            else{
-                System.out.println("Password dont match");
-                return null;
-            }
-
-        }
-        else{
-            System.out.println("Problem");
-        }
-        System.out.println("Username don't match");
-        return null;
+        System.out.println(json);
+        return 0;
     }
+
+
+//        if(tutorService.getTutorByName(tutor.getName())!=null){
+//            Tutor matchedTutor=tutorService.getTutorByName(tutor.getName());
+//            if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
+//            {
+//                HttpSession session=request.getSession();
+//                session.setAttribute("Session id",matchedTutor.getId());
+//                session.setAttribute("Session token",request.getSession());
+//                session.setAttribute("Session name",matchedTutor.getName());
+//                System.out.println("Authenticated");
+//                return "Authenticated";
+//            }
+//            else{
+//                System.out.println("Password dont match");
+//                return null;
+//            }
+//
+//        }
+//        else{
+//            System.out.println("Problem");
+//        }
+//        System.out.println("Username don't match");
+//        return null;
+//    }
 
 }
