@@ -40,29 +40,30 @@ public class LoginController {
         return 0;
     }
 
+//         if(tutorService.getTutorByName(tutor.getName())!=null){
+//             Tutor matchedTutor=tutorService.getTutorByName(tutor.getName());
+//             if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
+//             {
+//                 HttpSession session=request.getSession();
+//                 //What session information we are going to add
+//                 session.setAttribute("Session id",matchedTutor.getId());
+//                 session.setAttribute("Session token",request.getSession());
+//                 session.setAttribute("Session name",matchedTutor.getName());
+//                 session.setAttribute("Session role",matchedTutor.getRole());
+//                 System.out.println("Authenticated");
+//                 return "Authenticated";
+//             }
+//             else{
+//                 System.out.println("Password dont match");
+//                 return null;
+//             }
 
-//        if(tutorService.getTutorByName(tutor.getName())!=null){
-//            Tutor matchedTutor=tutorService.getTutorByName(tutor.getName());
-//            if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
-//            {
-//                HttpSession session=request.getSession();
-//                session.setAttribute("Session id",matchedTutor.getId());
-//                session.setAttribute("Session token",request.getSession());
-//                session.setAttribute("Session name",matchedTutor.getName());
-//                System.out.println("Authenticated");
-//                return "Authenticated";
-//            }
-//            else{
-//                System.out.println("Password dont match");
-//                return null;
-//            }
-//
-//        }
-//        else{
-//            System.out.println("Problem");
-//        }
-//        System.out.println("Username don't match");
-//        return null;
-//    }
+//         }
+//         else{
+//             System.out.println("Problem");
+//         }
+//         System.out.println("Username don't match");
+//         return null;
+//     }
 
 }
