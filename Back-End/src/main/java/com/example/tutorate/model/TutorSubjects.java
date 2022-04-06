@@ -1,8 +1,6 @@
 package com.example.tutorate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 class TutorSubjectKeys implements Serializable {
@@ -11,11 +9,14 @@ class TutorSubjectKeys implements Serializable {
 }
 
 @Entity
+@Table(name="tutor_subjects")
 @IdClass(TutorSubjectKeys.class)
 public class TutorSubjects {
     @Id
+    @Column(name="tutor_id")
     private int tutorId;
     @Id
+    @Column(name="subject_id")
     private int subjectId;
 
     public int getTutorId() {
