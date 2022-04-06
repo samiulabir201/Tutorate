@@ -3,9 +3,8 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 const options = [
-  { value: 'Chocolate', label: 'Chocolate' },
-  { value: 'Strawberry', label: 'Strawberry' },
-  { value: 'Vanilla', label: 'Vanilla' },
+  { value: 'Chemistry', label: 'Chemistry' },
+  { value: 'Physics', label: 'Physics' },
 ];
 
 export const Subjects = (props) => {
