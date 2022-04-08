@@ -29,4 +29,8 @@ public class UserServiceImpl implements UserService{
         else
             return false;
     }
+
+    public void addNewUser(User user) {
+        userRepository.save(user);
+    }
 }

@@ -46,8 +46,15 @@ export const ProfileDialog = (props) => {
         // TODO - check for invalid login details
     }
 
-    const register = () => {
-
+    const register = async () => {
+        const res = await fetch(`http://localhost:8080/user/register`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username:user, password:password}),
+        });
+        props.updateUser(user);
+        props.onHide();
     }
 
     const handleSubmit = (event) => {
@@ -71,6 +78,7 @@ export const ProfileDialog = (props) => {
         setUserError('');
         setPasswordError('');
         setShowLogin(!showLogin);
+        console.log(showLogin);
     }
 
     return (
@@ -120,8 +128,7 @@ export const ProfileDialog = (props) => {
                     &nbsp;
                     <button
                         class="dialogSwitchButton"
-                        onClick={() => handleDialogSwitch()}
-                    >
+                        onClick={() => handleDialogSwitch()}>
                         {showLogin ? "Sign up" : "Log in"}
                     </button>
                 </div>
