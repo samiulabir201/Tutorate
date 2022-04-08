@@ -11,20 +11,50 @@ export const ProfileDialog = (props) => {
     const [passwordError, setPasswordError] = useState('');
     const [showLogin, setShowLogin] = useState(true);
 
+    const checkUser = async () => {
+        const res = await fetch(`http://localhost:8080/user/checkUser`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username:user, password:password}),
+        });
+
+        if (await res.json() === true) {
+            await login();
+        }
+        else {
+            setUserError("User doesn't exist!");
+        }
+        // TODO - check for invalid login details
+    }
+
     const login = async () => {
         const res = await fetch(`http://localhost:8080/user/login`, {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({user:user, password:password}),
+            body: JSON.stringify({username:user, password:password}),
         });
-        props.updateUser(user);
-        props.onHide();
+
+        if (await res.json() === true) {
+            props.updateUser(user);
+            props.onHide();
+        }
+        else {
+            setPasswordError("Incorrect Password!");
+        }
         // TODO - check for invalid login details
     }
 
-    const register = () => {
-
+    const register = async () => {
+        const res = await fetch(`http://localhost:8080/user/register`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username:user, password:password}),
+        });
+        props.updateUser(user);
+        props.onHide();
     }
 
     const handleSubmit = (event) => {
@@ -40,7 +70,7 @@ export const ProfileDialog = (props) => {
             return;
         }
 
-        if (showLogin) login();
+        if (showLogin) checkUser();
         else register();
     };
 
@@ -48,6 +78,7 @@ export const ProfileDialog = (props) => {
         setUserError('');
         setPasswordError('');
         setShowLogin(!showLogin);
+        console.log(showLogin);
     }
 
     return (
@@ -97,8 +128,7 @@ export const ProfileDialog = (props) => {
                     &nbsp;
                     <button
                         class="dialogSwitchButton"
-                        onClick={() => handleDialogSwitch()}
-                    >
+                        onClick={() => handleDialogSwitch()}>
                         {showLogin ? "Sign up" : "Log in"}
                     </button>
                 </div>
