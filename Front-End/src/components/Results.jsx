@@ -17,15 +17,165 @@ export const Results = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="sm:px-56 flex flex-wrap justify-between space-y-6">
+    <div className="sm:px-36 flex flex-wrap">
       {results?.map((result, index) => (
-        <div key={index} className="md:w-2/5 w-full">
-          <a href={result.id} target="_blank" rel="noreferrer">
-            <p className="text-sm">{result.id}</p>
-            <p className="text-lg hover:underline dark:text-blue-300 text-blue-700  ">{result.name}</p>
-          </a>
-        </div>
+        <React.Fragment>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div key={index} className="container md:w-2/5 w-full">
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-4 d-flex">
+                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                  </div>
+                  <div className="col-md-8">
+                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <p className="mb-2">{result.rating}</p>
+                    <p className="mb-2">{result.location}</p>
+                    <p className="mb-2">{result.subjects}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
       ))}
+
     </div>
   );
 };
