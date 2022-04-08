@@ -6,6 +6,7 @@ export const TutorProfile = () => {
     let { id } = useParams();
     const [name, setName] = useState('');
     const [wage, setWage] = useState(0);
+    const [subjects, setSubjects] = useState([]);
     const [image, setImage] = useState('/profile.png')
 
     const getTutor = async () => {
@@ -17,6 +18,7 @@ export const TutorProfile = () => {
         let tutor = await res.json();
         setName(tutor.name);
         setWage(tutor.min_wage);
+        setSubjects(tutor.subjects);
     }
 
     useEffect(async () => {
@@ -33,7 +35,7 @@ export const TutorProfile = () => {
                     <p className="mb-2">Location:</p>
                     <p className="mb-2">Contact:</p>
                     <p className="mb-2">Grades:</p>
-                    <p className="mb-2">Subjects:</p>
+                    <p className="mb-2">Subjects: {subjects}</p>
                     <p>Fees: BDT {wage}</p>
                 </div>
             </div>

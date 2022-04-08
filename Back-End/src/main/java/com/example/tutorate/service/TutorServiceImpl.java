@@ -1,12 +1,8 @@
 package com.example.tutorate.service;
 
 import com.example.tutorate.model.SearchParams;
-import com.example.tutorate.model.Subjects;
 import com.example.tutorate.model.Tutor;
-import com.example.tutorate.model.TutorSubjects;
-import com.example.tutorate.repository.SubjectsRepository;
 import com.example.tutorate.repository.TutorRepository;
-import com.example.tutorate.repository.TutorSubjectsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +17,12 @@ public class TutorServiceImpl implements TutorService{
 
     @Autowired
     private TutorRepository tutorRepository;
-    @Autowired
-    private TutorSubjectsRepository tutorSubjectsRepository;
-    @Autowired
-    private SubjectsRepository subjectsRepository;
 
-    public TutorServiceImpl() {
-    }
+    public TutorServiceImpl() {}
 
     @Override
     public Tutor saveTutor(Tutor tutor) {
         return tutorRepository.save(tutor);
-    }
-
-    @Override
-    public List<String> getTutorSubjects(int tutorID) {
-        List<String> results = new ArrayList<>();
-        for (TutorSubjects tutorSubject: tutorSubjectsRepository.findByTutorId(tutorID)) {
-            int subjectId = tutorSubject.getSubjectId();
-            Subjects subject = subjectsRepository.findById(subjectId).get();
-            results.add(subject.getName());
-        }
-        return results;
     }
 
     @Override
@@ -54,7 +34,7 @@ public class TutorServiceImpl implements TutorService{
         for (Tutor tutor: tutorRepository.findAll()) {
             String tutorName = tutor.getName().toLowerCase();
             if (tutor.getMin_wage() > maxWage)  continue;
-            if (subjects != null && Collections.disjoint(List.of(subjects), getTutorSubjects(tutor.getId())))
+            if (subjects != null && Collections.disjoint(List.of(subjects), tutor.getSubjects()))
                 continue;
             if (tutorName.startsWith(searchTerm))   tutors.add(tutor);
         }

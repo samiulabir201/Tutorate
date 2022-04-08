@@ -14,11 +14,8 @@ public class Tutor {
     private String password;
     private int min_wage;
     private int role;
-    /*
-    * Element collection enables subjects to be stored in another table according to id but can be
-    * called with Tutor itself*/
     @ElementCollection
-    private List<String> subjects;
+    private List<String> subjects = new ArrayList<>();
   
     public Tutor() {}
 
@@ -61,7 +58,6 @@ public class Tutor {
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }
-
 
     public int getRole() {
         return role;
