@@ -3,7 +3,7 @@ import {Rating} from "@mui/material";
 
 export const Ranking = (props) => {
     return <Rating
-        value={props.rank}
+        defaultValue={props.rank}
         onChange={(event, value) => {props.onRankChange(value)}}
         />
 }
