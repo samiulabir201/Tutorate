@@ -18,11 +18,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(243, 244, 246, 0.8);
 }
 
 .AdvancedSearch .optionsContainer {
-    width: 350px;
+    width: 700px;
     height: 460px;
     margin: auto;
     padding: 20px;
@@ -30,4 +30,17 @@
     align-items: center;
     display: grid;
     background-color: white;
+    border-radius: 10px;
+}
+
+.AdvancedSearch button {
+    background-color: rgb(191 219 254);
+    padding: 10px 30px;
+    width: fit-content;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.AdvancedSearch button:hover {
+    background-color: rgb(96 165 250);
 }

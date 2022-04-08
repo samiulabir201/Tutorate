@@ -7,6 +7,13 @@ const options = [
   { value: 'Physics', label: 'Physics' },
 ];
 
+const styles = {
+  container: base => ({
+    ...base,
+    flex: 1
+  })
+};
+
 export const Subjects = (props) => {
   const getInitValues = () => props.subjects?.map((val) => ({ label: val, value: val }));
   const changeHandler = (event) => {
@@ -17,5 +24,5 @@ export const Subjects = (props) => {
     props.onSubjectChange(values);
   };
   // eslint-disable-next-line react/destructuring-assignment
-  return (<Select components={makeAnimated()} defaultValue={getInitValues()} isMulti options={options} onChange={changeHandler} />);
+  return (<Select styles={styles} components={makeAnimated()} defaultValue={getInitValues()} isMulti options={options} onChange={changeHandler} />);
 };
