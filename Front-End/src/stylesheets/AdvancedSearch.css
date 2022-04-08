@@ -33,7 +33,7 @@
     border-radius: 10px;
 }
 
-.AdvancedSearch button {
+.AdvancedSearch .button {
     background-color: rgb(191 219 254);
     padding: 10px 30px;
     width: fit-content;
@@ -41,6 +41,6 @@
     border-radius: 8px;
 }
 
-.AdvancedSearch button:hover {
+.AdvancedSearch .button:hover {
     background-color: rgb(96 165 250);
 }
