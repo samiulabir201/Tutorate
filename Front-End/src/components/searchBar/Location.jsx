@@ -7,6 +7,6 @@ export const Location = (props) => {
         renderInput={(params) => <TextField {...params} label="Location" />}
         options={locations}
         value={props.location}
-        onChange={props.onLocationChange}
+        onChange={(event, value) => {props.onLocationChange(value)}}
     />
 }
