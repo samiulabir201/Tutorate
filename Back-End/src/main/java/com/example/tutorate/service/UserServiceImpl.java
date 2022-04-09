@@ -5,8 +5,6 @@ import com.example.tutorate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -15,23 +13,16 @@ public class UserServiceImpl implements UserService{
 
     public boolean userExists(String username) {
         User user = userRepository.findByUsername(username);
-        if(user != null)
-            return true;
-        else
-            return false;
+        return user != null;
     }
 
     public boolean authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
-
-        if(Objects.equals(user.getPassword(), password))
-            return true;
-        else
-            return false;
+        return password.equals(user.getPassword());
     }
 
     public User addNewUser(User user) {
         userRepository.save(user);
-        return user;
+        return userRepository.findByUsername(user.getUsername());
     }
 }

@@ -4,8 +4,10 @@ import {Subjects} from "./searchBar/Subjects";
 import {Grades} from "./searchBar/Grades";
 import {Location} from "./Location";
 import "../stylesheets/TutorProfileForm.css";
+import {useStateContext} from "../contexts/StateContextProvider";
 
 export const TutorProfileForm = (props) => {
+    const {user, setUser} = useStateContext();
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [location, setLocation] = useState('');
@@ -13,16 +15,17 @@ export const TutorProfileForm = (props) => {
     const [grades, setGrades] = useState([]);
     const [wage, setWage] = useState(0);
 
-    const createProfile = (event) => {
+    const createProfile = async (event) => {
         event.preventDefault();
 
         props.onHide();
-        fetch(`http://localhost:8080/tutor/add`, {
+        const res = await fetch(`http://localhost:8080/tutor/add`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({name, location, phone, grades, subjects, "min_wage": wage}),
         });
+        setUser(await res.json());
     }
     return (
         <ReactModal
