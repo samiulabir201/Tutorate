@@ -19,11 +19,19 @@ export const ProfileDialog = (props) => {
             body: JSON.stringify({username:user, password:password}),
         });
 
-        if (await res.json() === true) {
-            await login();
+        if (showLogin) {
+            if (await res.json() === true) {
+                await login();
+            } else {
+                setUserError("User doesn't exist!");
+            }
         }
         else {
-            setUserError("User doesn't exist!");
+            if (await res.json() === true) {
+                setUserError("Username already exists!");
+            } else {
+                await register();
+            }
         }
         // TODO - check for invalid login details
     }
@@ -70,8 +78,7 @@ export const ProfileDialog = (props) => {
             return;
         }
 
-        if (showLogin) checkUser();
-        else register();
+        checkUser();
     };
 
     const handleDialogSwitch = () => {
