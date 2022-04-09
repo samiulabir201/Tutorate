@@ -4,23 +4,23 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Dropdown } from 'react-bootstrap';
 import { ProfileDialog } from './ProfileDialog';
 import {TutorProfileForm} from "./TutorProfileForm";
+import {useStateContext} from "../contexts/StateContextProvider";
 
 export const ProfileBar = () => {
     const [profileDialogShow, setProfileDialogShow] = useState(false);
-    const [user, setUser] = useState('');
-    const [role, setRole] = useState(0);
+    const {user, setUser} = useStateContext();
     const [formShown, setFormShown] = useState(false);
 
     const logout = async () => {
-        const res = await fetch(`http://localhost:8080/user/logout`, {
+        await fetch(`http://localhost:8080/user/logout`, {
             method: 'GET',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
         });
-        setUser('');
+        setUser({});
     }
 
-    if (user === '') {
+    if (user.username === undefined) {
         return (
             <div className="my-auto">
                 <button
@@ -32,7 +32,6 @@ export const ProfileBar = () => {
                 <div>
                     <ProfileDialog
                         show={profileDialogShow}
-                        updateUser={(newUser) => {setUser(newUser)}}
                         onHide={() => {setProfileDialogShow(false)}}
                     />
                 </div>
@@ -45,13 +44,13 @@ export const ProfileBar = () => {
                 <Dropdown.Toggle className="dropdown">
                     <button className="profileBar">
                         <i className="icon bi bi-person-circle" />
-                        {user}
+                        {user.username}
                     </button>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-menu">
                     <Dropdown.Item
-                        hidden={role !== 0}
+                        hidden={user.role === 'tutor'}
                         className="dropdown-item"
                         onClick={() => {setFormShown(true)}}>
                         <i className="icon bi bi-box-arrow-left" />
@@ -59,7 +58,7 @@ export const ProfileBar = () => {
                     </Dropdown.Item>
                     <TutorProfileForm show={formShown} onHide={() => setFormShown(false)}/>
                     <Dropdown.Item
-                        hidden={role === 0}
+                        hidden={user.role === 'user'}
                         className="dropdown-item"
                         onClick={() => {}}>
                         <i className="icon bi bi-box-arrow-left" />

@@ -3,9 +3,11 @@ import ReactModal from "react-modal";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../stylesheets/ProfileDialog.css";
 import md5 from "md5";
+import {useStateContext} from "../contexts/StateContextProvider";
 
 export const ProfileDialog = (props) => {
-    const [user, setUser] = useState('');
+    const {user, setUser} = useStateContext();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [userError, setUserError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -16,24 +18,17 @@ export const ProfileDialog = (props) => {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username:user, password:password}),
+            body: JSON.stringify({username, password}),
         });
 
         if (showLogin) {
-            if (await res.json() === true) {
-                await login();
-            } else {
-                setUserError("User doesn't exist!");
-            }
+            if (await res.json() === true)  await login();
+            else  setUserError("User doesn't exist!");
         }
         else {
-            if (await res.json() === true) {
-                setUserError("Username already exists!");
-            } else {
-                await register();
-            }
+            if (await res.json() === true)  setUserError("Username already exists!");
+            else    await register();
         }
-        // TODO - check for invalid login details
     }
 
     const login = async () => {
@@ -41,19 +36,16 @@ export const ProfileDialog = (props) => {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username:user, password:password}),
+            body: JSON.stringify({username, password}),
         });
 
         let userObject = await res.json();
 
         if (userObject != null) {
-            props.updateUser(user);
+            setUser(userObject);
             props.onHide();
         }
-        else {
-            setPasswordError("Incorrect Password!");
-        }
-        // TODO - check for invalid login details
+        else    setPasswordError("Incorrect Password!");
     }
 
     const register = async () => {
@@ -61,12 +53,15 @@ export const ProfileDialog = (props) => {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username:user, password:password}),
+            body: JSON.stringify({username, password}),
         });
 
         let userObject = await res.json();
-        props.updateUser(user);
-        props.onHide();
+
+        if (userObject != null) {
+            setUser(userObject);
+            props.onHide();
+        }
     }
 
     const handleSubmit = (event) => {
@@ -81,7 +76,6 @@ export const ProfileDialog = (props) => {
             setPasswordError("Please enter a password." );
             return;
         }
-
         checkUser();
     };
 
@@ -89,7 +83,6 @@ export const ProfileDialog = (props) => {
         setUserError('');
         setPasswordError('');
         setShowLogin(!showLogin);
-        console.log(showLogin);
     }
 
     return (
@@ -108,7 +101,7 @@ export const ProfileDialog = (props) => {
                             className="inputProfileInfo"
                             name="email"
                             type="text"
-                            onChange={(event) => setUser(event.target.value)}
+                            onChange={(event) => setUsername(event.target.value)}
                         />
                         <p className="error">{userError}</p>
                     </label>

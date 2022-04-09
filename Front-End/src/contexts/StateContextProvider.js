@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
+  const[user, setUser] = useState({});
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,6 +34,8 @@ export const StateContextProvider = ({ children }) => {
 
   return (
     <StateContext.Provider value={{
+        user,
+        setUser,
       getResults,
       results,
       searchTerm,
