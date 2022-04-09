@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Autocomplete, TextField} from "@mui/material";
 
 export const Subjects = (props) => {
-  const options = ["Chemistry", "Physics"];
+
+  const [subjects, setSubjects] = useState([]);
+
+  useEffect(async () => {
+    const res = await fetch(`http://localhost:8080/tutor/getAllSubjects`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    setSubjects(await res.json());
+  })
 
   return <Autocomplete
       multiple
       renderInput={(params) => <TextField {...params} label="Subjects" />}
-      options={options}
+      options={subjects}
       defaultValue={props.subjects}
       onChange={(event, values) => props.onSubjectChange(values)}
   />

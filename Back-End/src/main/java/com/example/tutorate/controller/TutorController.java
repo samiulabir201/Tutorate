@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
@@ -68,5 +70,10 @@ public class TutorController {
     @GetMapping("/{id}")
         public Tutor getTutorDetail(@PathVariable int id){
         return tutorRepository.findById(id);
+    }
+
+    @GetMapping("/getAllSubjects")
+    public List<String> getAllSubjects() {
+        return tutorRepository.getAllSubjects().stream().distinct().collect(Collectors.toList());
     }
 }
