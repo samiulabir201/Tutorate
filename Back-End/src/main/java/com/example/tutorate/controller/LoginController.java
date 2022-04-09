@@ -1,5 +1,6 @@
 package com.example.tutorate.controller;
 
+import com.example.tutorate.repository.UserRepository;
 import com.example.tutorate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-    
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/checkUser")
     public boolean checkUser (@RequestBody User user, HttpServletRequest request) {
         return userService.userExists(user.getUsername());
@@ -23,12 +26,11 @@ public class LoginController {
     @PostMapping("/login")
     public User login (@RequestBody User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(userService.authenticate(user.getUsername(), user.getPassword()) == true) {
+        if(userService.authenticate(user.getUsername(), user.getPassword())) {
             session.setAttribute("User", user.getUsername());
-            return user;
+            return userRepository.findByUsername(user.getUsername());
         }
-         else
-             return null;
+         else   return null;
     }
 
     @PostMapping("/register")
