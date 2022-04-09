@@ -19,8 +19,6 @@ public class Tutor {
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
-    private String password;
-    private int role;
   
     public Tutor() {}
 
@@ -86,21 +84,5 @@ public class Tutor {
 
     public void setMin_wage(int min_wage) {
         this.min_wage = min_wage;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
     }
 }

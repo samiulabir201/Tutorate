@@ -21,10 +21,7 @@ public class TutorController {
     private TutorService tutorService;
     @Autowired
     private TutorRepository tutorRepository;
-    enum Role{
-        tutor,
-        student
-    }
+
     @PostMapping("/add")
     public String add(@RequestBody Tutor tutor) {
         tutorService.saveTutor(tutor);
@@ -58,12 +55,12 @@ public class TutorController {
             return null;
             HttpSession session=request.getSession();
             int userId= (int) session.getAttribute("Session id");
-            int role= (int) session.getAttribute("Session role");
-            if(role==Role.tutor.ordinal())
-            {
-                Tutor user=tutorRepository.findById(userId);
-                return user;
-            }
+//            int role= (int) session.getAttribute("Session role");
+//            if(role==Role.tutor.ordinal())
+//            {
+//                Tutor user=tutorRepository.findById(userId);
+//                return user;
+//            }
             return null;
     }
 
