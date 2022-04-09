@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600, allowCredentials = "true")
 @RestController
@@ -63,14 +66,14 @@ public class TutorController {
             }
             return null;
     }
-    /*
-    * details of tutor selected requested parameter is Tutor object to make it easy to
-    * remember what we are passing for each get
-    * */
-    @GetMapping("/tutordetail")
-        public Tutor getTutorDetail(@RequestBody Tutor tutor,HttpServletRequest request){
 
-        Tutor selectedTutor=tutorRepository.findById(tutor.getId());
-            return selectedTutor;
+    @GetMapping("/{id}")
+        public Tutor getTutorDetail(@PathVariable int id){
+        return tutorRepository.findById(id);
+    }
+
+    @GetMapping("/getAllSubjects")
+    public List<String> getAllSubjects() {
+        return tutorRepository.getAllSubjects().stream().distinct().collect(Collectors.toList());
     }
 }
