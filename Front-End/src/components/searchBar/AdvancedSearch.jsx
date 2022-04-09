@@ -7,7 +7,6 @@ import '../../stylesheets/AdvancedSearch.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Ranking} from "./Ranking";
 import {Grades} from "./Grades";
-import {Location} from "./Location";
 
 export const AdvancedSearch = () => {
   const { advancedSearch, setAdvancedSearch } = useStateContext();
@@ -15,11 +14,10 @@ export const AdvancedSearch = () => {
   const [grades, setGrades] = useState([]);
   const [wages, setWages] = useState([200, 2000]);
   const [rank, setRank] = useState(0);
-  const [location, setLocation] = useState('');
   const { searchParams, setNewSearchParams } = useStateContext();
 
   const updateParams = () => {
-    const newParams = { subjects, wages, rank, grades, location };
+    const newParams = { subjects, wages, rank, grades };
     setNewSearchParams(newParams);
     setAdvancedSearch(false);
   };
@@ -27,6 +25,7 @@ export const AdvancedSearch = () => {
   return (
     <ReactModal
       isOpen={advancedSearch}
+      onRequestClose={() => setAdvancedSearch(false)}
       className="AdvancedSearch"
       overlayClassName="AdvancedSearchOverlay"
     >
@@ -42,9 +41,6 @@ export const AdvancedSearch = () => {
         </div>
         <div className="d-inline-flex">
           <p className="align-self-center me-5">Ranking:</p><Ranking rank={searchParams.rank} onRankChange={(newRank) => setRank(newRank)} />
-        </div>
-        <div className="d-inline-flex">
-          <p className="align-self-center me-5">Location:</p><Location location={searchParams.location} onLocationChange={(newLocation) => setLocation(newLocation)} />
         </div>
         <div className="d-inline-flex">
           <button className="button" type="button" onClick={updateParams}>Search</button>
