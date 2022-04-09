@@ -11,6 +11,15 @@ export const ProfileBar = () => {
     const [role, setRole] = useState(0);
     const [formShown, setFormShown] = useState(false);
 
+    const logout = async () => {
+        const res = await fetch(`http://localhost:8080/user/logout`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+        });
+        setUser('');
+    }
+
     if (user === '') {
         return (
             <div className="my-auto">
@@ -58,7 +67,7 @@ export const ProfileBar = () => {
                     </Dropdown.Item>
                     <Dropdown.Item
                         className="dropdown-item"
-                        onClick={() => setUser('')}>
+                        onClick={() => logout()}>
                         <i className="icon bi bi-box-arrow-left" />
                         Log out
                     </Dropdown.Item>

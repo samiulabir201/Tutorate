@@ -46,6 +46,12 @@ public class LoginController {
         return userService.addNewUser(user);
     }
 
+    @GetMapping("/logout")
+    public void logout (HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+    }
+
 //         if(tutorService.getTutorByName(tutor.getName())!=null){
 //             Tutor matchedTutor=tutorService.getTutorByName(tutor.getName());
 //             if(encoder.matches(tutor.getPassword(),matchedTutor.getPassword()))
