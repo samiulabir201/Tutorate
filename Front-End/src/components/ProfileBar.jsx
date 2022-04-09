@@ -10,7 +10,7 @@ export const ProfileBar = () => {
 
     if (user === '') {
         return (
-            <div>
+            <div className="my-auto">
                 <button
                     className="profileBar"
                     onClick={() => {setProfileDialogShow(true)}}>
@@ -29,7 +29,7 @@ export const ProfileBar = () => {
     }
     else {
         return (
-            <Dropdown className="profileOptions">
+            <Dropdown className="my-auto profileOptions">
                 <Dropdown.Toggle className="dropdown">
                     <button className="profileBar">
                         <i className="icon bi bi-person-circle" />

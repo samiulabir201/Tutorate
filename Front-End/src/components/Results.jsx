@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import { useStateContext } from '../contexts/StateContextProvider';
 import { Loading } from './Loading';
@@ -28,7 +28,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -45,7 +47,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -62,7 +66,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -79,7 +85,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -96,7 +104,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -113,7 +123,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -130,7 +142,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -147,7 +161,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
@@ -164,7 +180,9 @@ export const Results = () => {
                     <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
-                    <a href={result.id} target="_blank" rel="noreferrer" className="mb-3 fw-bold fs-4 text-center">{result.name}</a>
+                    <Link to={"/" + result.id}>
+                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                    </Link>
                     <p className="mb-2">{result.rating}</p>
                     <p className="mb-2">{result.location}</p>
                     <p className="mb-2">{result.subjects}</p>
