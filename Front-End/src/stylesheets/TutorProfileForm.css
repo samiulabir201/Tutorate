@@ -1,0 +1,46 @@
+.TutorProfileForm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+
+    border: 2px solid #1f252d;
+    border-radius: 10px;
+}
+
+.TutorProfileFormOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(243, 244, 246, 0.8);
+}
+
+.TutorProfileForm .optionsContainer {
+    width: 700px;
+    height: 460px;
+    margin: auto;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.TutorProfileForm .button {
+    background-color: rgb(191 219 254);
+    padding: 10px 30px;
+    width: fit-content;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.TutorProfileForm .button:hover {
+    background-color: rgb(96 165 250);
+}

@@ -11,6 +11,9 @@ import java.util.List;
 public interface TutorRepository extends JpaRepository<Tutor, Integer> {
     public Tutor findById(int id);
 
+    @Query(value = "SELECT location FROM tutor", nativeQuery = true)
+    List<String> getAllLocations();
+
     @Query(value = "SELECT subjects FROM tutor_subjects", nativeQuery = true)
     List<String> getAllSubjects();
 }

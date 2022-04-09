@@ -3,10 +3,13 @@ import '../stylesheets/ProfileBar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Dropdown } from 'react-bootstrap';
 import { ProfileDialog } from './ProfileDialog';
+import {TutorProfileForm} from "./TutorProfileForm";
 
 export const ProfileBar = () => {
     const [profileDialogShow, setProfileDialogShow] = useState(false);
     const [user, setUser] = useState('');
+    const [role, setRole] = useState(0);
+    const [formShown, setFormShown] = useState(false);
 
     if (user === '') {
         return (
@@ -38,6 +41,21 @@ export const ProfileBar = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdown-menu">
+                    <Dropdown.Item
+                        hidden={role !== 0}
+                        className="dropdown-item"
+                        onClick={() => {setFormShown(true)}}>
+                        <i className="icon bi bi-box-arrow-left" />
+                        Create Tutor Profile
+                    </Dropdown.Item>
+                    <TutorProfileForm show={formShown} onHide={() => setFormShown(false)}/>
+                    <Dropdown.Item
+                        hidden={role === 0}
+                        className="dropdown-item"
+                        onClick={() => {}}>
+                        <i className="icon bi bi-box-arrow-left" />
+                        View Tutor Profile
+                    </Dropdown.Item>
                     <Dropdown.Item
                         className="dropdown-item"
                         onClick={() => setUser('')}>

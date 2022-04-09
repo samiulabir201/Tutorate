@@ -23,9 +23,8 @@ public class TutorController {
     private TutorRepository tutorRepository;
 
     @PostMapping("/add")
-    public String add(@RequestBody Tutor tutor) {
+    public void add(@RequestBody Tutor tutor) {
         tutorService.saveTutor(tutor);
-        return "New tutor added";
     }
   
     @PostMapping("/getTutors")
@@ -72,5 +71,10 @@ public class TutorController {
     @GetMapping("/getAllSubjects")
     public List<String> getAllSubjects() {
         return tutorRepository.getAllSubjects().stream().distinct().collect(Collectors.toList());
+    }
+
+    @GetMapping("/getAllLocations")
+    public List<String> getAllLocation() {
+        return tutorRepository.getAllLocations().stream().distinct().collect(Collectors.toList());
     }
 }
