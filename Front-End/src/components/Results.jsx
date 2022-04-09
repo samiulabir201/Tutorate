@@ -1,18 +1,32 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 
 import { useStateContext } from '../contexts/StateContextProvider';
 import { Loading } from './Loading';
 
 export const Results = () => {
-  const { results, loading, getResults, searchTerm } = useStateContext();
+  const { searchTerm, searchParams} = useStateContext();
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
+  const getResults = async () => {
+    setLoading(true);
+
+    const res = await fetch(`http://localhost:8080/tutor/getTutors?searchTerm=${searchTerm}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(searchParams),
+    });
+    const data = await res.json();
+    setResults(data);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    if (searchTerm !== '') {
-      getResults(searchTerm);
-    }
-  }, [searchTerm, location.pathname]);
+    if (searchTerm !== '')  getResults();
+  }, [searchTerm, searchParams, location.pathname]);
 
   if (loading) return <Loading />;
 

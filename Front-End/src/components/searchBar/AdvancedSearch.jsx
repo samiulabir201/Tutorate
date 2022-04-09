@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactModal from 'react-modal';
 import { Subjects } from './Subjects';
 import { useStateContext } from '../../contexts/StateContextProvider';
@@ -8,24 +8,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Ranking} from "./Ranking";
 import {Grades} from "./Grades";
 
-export const AdvancedSearch = () => {
-  const { advancedSearch, setAdvancedSearch } = useStateContext();
+export const AdvancedSearch = (props) => {
   const [subjects, setSubjects] = useState([]);
   const [grades, setGrades] = useState([]);
   const [wages, setWages] = useState([200, 2000]);
   const [rank, setRank] = useState(0);
-  const { searchParams, setNewSearchParams } = useStateContext();
+  const { searchParams, setSearchParams } = useStateContext();
 
   const updateParams = () => {
     const newParams = { subjects, wages, rank, grades };
-    setNewSearchParams(newParams);
-    setAdvancedSearch(false);
+    setSearchParams(newParams);
+    props.onHide();
   };
 
   return (
     <ReactModal
-      isOpen={advancedSearch}
-      onRequestClose={() => setAdvancedSearch(false)}
+      isOpen={props.show}
+      onRequestClose={props.onHide}
       className="AdvancedSearch"
       overlayClassName="AdvancedSearchOverlay"
     >
@@ -44,7 +43,7 @@ export const AdvancedSearch = () => {
         </div>
         <div className="d-inline-flex">
           <button className="button" type="button" onClick={updateParams}>Search</button>
-          <button className="button" type="button" onClick={() => setAdvancedSearch(false)}>Cancel</button>
+          <button className="button" type="button" onClick={props.onHide}>Cancel</button>
         </div>
       </div>
     </ReactModal>
