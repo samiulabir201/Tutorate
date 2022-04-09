@@ -1,9 +1,6 @@
 package com.example.tutorate.service;
 
-import com.example.tutorate.model.SearchParams;
-import com.example.tutorate.model.Subjects;
-import com.example.tutorate.model.Tutor;
-import com.example.tutorate.model.TutorSubjects;
+import com.example.tutorate.model.*;
 import com.example.tutorate.repository.SubjectsRepository;
 import com.example.tutorate.repository.TutorRepository;
 import com.example.tutorate.repository.TutorSubjectsRepository;
@@ -15,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TutorServiceImpl implements TutorService{
@@ -77,6 +75,8 @@ public class TutorServiceImpl implements TutorService{
         }
         return searched_tutor;
     }
+
+
 
     /*
     * Check if user is authenticated
