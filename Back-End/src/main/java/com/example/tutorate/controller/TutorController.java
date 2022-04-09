@@ -1,15 +1,16 @@
 package com.example.tutorate.controller;
 
+import com.example.tutorate.model.Role;
 import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
+import com.example.tutorate.model.User;
 import com.example.tutorate.repository.TutorRepository;
+import com.example.tutorate.repository.UserRepository;
 import com.example.tutorate.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,16 +21,21 @@ public class TutorController {
     @Autowired
     private TutorService tutorService;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private TutorRepository tutorRepository;
 
     @PostMapping("/add")
-    public void add(@RequestBody Tutor tutor) {
+    public User add(@RequestBody Tutor tutor, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("User");
+        User user = userRepository.findByUsername(username);
+        user.setRole(Role.tutor);
         tutorService.saveTutor(tutor);
+        return user;
     }
   
     @PostMapping("/getTutors")
     public List<Tutor> getTutors(@RequestParam("searchTerm") String searchTerm, @RequestBody SearchParams searchParams, HttpServletRequest request) {
-        // if(tutorService.sessionCheck(request))
         return tutorService.getTutors(searchTerm, searchParams);
     }
 
@@ -38,9 +44,7 @@ public class TutorController {
     * */
     @GetMapping("/home")
     public List<Tutor>HomePage(HttpServletRequest request){
-
         return tutorRepository.findAll();
-
     }
     /*
     * Provides detail of user logged in

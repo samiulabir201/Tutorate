@@ -1,12 +1,6 @@
 package com.example.tutorate.model;
 
 import javax.persistence.*;
-import java.util.List;
-
-enum Role {
-    user,
-    tutor
-}
 
 @Entity
 public class User {
