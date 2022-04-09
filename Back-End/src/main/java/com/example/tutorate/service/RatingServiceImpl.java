@@ -1,8 +1,9 @@
 package com.example.tutorate.service;
 
-import com.example.tutorate.model.Student;
+
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.model.TutorRatingKey;
+import com.example.tutorate.model.User;
 import com.example.tutorate.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,12 @@ public class RatingServiceImpl implements RatingService{
 @Autowired
     RatingRepository ratingRepository;
     @Override
-    public boolean findRated(int studentId, int TutorId) {
+    public boolean findRated(int userId, int TutorId) {
 
         for(TutorRatingKey ratingKey:ratingRepository.findAll()){
-            Student student=ratingKey.getStudent();
+            User user=ratingKey.getUser();
             Tutor tutor=ratingKey.getTutor();
-            if(student.getId()==studentId && tutor.getId()==TutorId){
+            if(user.getId()==userId && tutor.getId()==TutorId){
                 return true;
 
             }
@@ -31,14 +32,14 @@ public class RatingServiceImpl implements RatingService{
     }
 
     @Override
-    public Student addRatingRecordStudent(Student student,TutorRatingKey tutorRatingKey) {
-        Set<TutorRatingKey> tutorRatingKeySetStudent=student.getTutorRatingKeySet();
+    public User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey) {
+        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
         tutorRatingKeySetStudent.add(tutorRatingKey);
-        student.setTutorRatingKeySet(tutorRatingKeySetStudent);
+        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
 
 
 
-        return student;
+        return user;
     }
 
     @Override

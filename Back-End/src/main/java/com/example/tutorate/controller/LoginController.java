@@ -1,9 +1,8 @@
 package com.example.tutorate.controller;
 
-import com.example.tutorate.model.Student;
+
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.model.User;
-import com.example.tutorate.repository.StudentRepository;
 import com.example.tutorate.repository.TutorRepository;
 import com.example.tutorate.repository.UserRepository;
 import com.example.tutorate.service.TutorService;
@@ -28,8 +27,6 @@ public class LoginController {
             private UserRepository userRepository;
     @Autowired
             private TutorRepository tutorRepository;
-    @Autowired
-            private StudentRepository studentRepository;
     BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
     @PostMapping("/login")
 
@@ -88,13 +85,7 @@ public class LoginController {
             tutor.setUser(user);
             tutorRepository.save(tutor);
         }
-        else {
-            Student student=new Student();
-            newUser.setStudent(student);
-            student.setUser(newUser);
-            studentRepository.save(student);
 
-        }
             userRepository.save(newUser);
 
         return 0;

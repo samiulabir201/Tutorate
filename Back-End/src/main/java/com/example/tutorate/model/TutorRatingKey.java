@@ -9,10 +9,11 @@ import java.io.Serializable;
 public class TutorRatingKey  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "rating_id")
     int id;
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    Student student;
+    @JoinColumn(name = "id")
+    User user;
     @ManyToOne
     @JoinColumn(name = "tutor_id")
     Tutor tutor;
@@ -20,8 +21,8 @@ public class TutorRatingKey  {
 
     }
 
-    public TutorRatingKey(Student student,Tutor tutor,int rate){
-        this.student=student;
+    public TutorRatingKey(User user,Tutor tutor,int rate){
+        this.user=user;
         this.tutor=tutor;
         this.rate=rate;
     }
@@ -36,16 +37,16 @@ public class TutorRatingKey  {
         this.rate = rate;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
     public Tutor getTutor() {

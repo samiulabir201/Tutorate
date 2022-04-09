@@ -1,12 +1,12 @@
 package com.example.tutorate.controller;
 
-
-import com.example.tutorate.model.Student;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.model.TutorRatingKey;
+import com.example.tutorate.model.User;
 import com.example.tutorate.repository.RatingRepository;
-import com.example.tutorate.repository.StudentRepository;
+
 import com.example.tutorate.repository.TutorRepository;
+import com.example.tutorate.repository.UserRepository;
 import com.example.tutorate.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ private RatingRepository ratingRepository;
 @Autowired
 private TutorRepository tutorRepository;
 @Autowired
-private StudentRepository studentRepository;
+private UserRepository userRepository;
 
 
 /*
@@ -36,16 +36,16 @@ private StudentRepository studentRepository;
 
     if(!ratingService.findRated(student_id,tutor_id)){
         Tutor selected_tutor= tutorRepository.findById(tutor_id);
-        Student selected_student=studentRepository.findById(student_id);
-        TutorRatingKey tutorRatingKey=new TutorRatingKey(selected_student,selected_tutor,rating);
+        User selected_user=userRepository.findById(student_id);
+        TutorRatingKey tutorRatingKey=new TutorRatingKey(selected_user,selected_tutor,rating);
 
-        selected_student=ratingService.addRatingRecordStudent(selected_student,tutorRatingKey);
+        selected_user=ratingService.addRatingRecordStudent(selected_user,tutorRatingKey);
         selected_tutor=ratingService.addRatingRecordTutor(selected_tutor,tutorRatingKey);
 
         selected_tutor.calculateAverageRating();
         ratingRepository.save(tutorRatingKey);
         tutorRepository.save(selected_tutor);
-        studentRepository.save(selected_student);
+        userRepository.save(selected_user);
 
         return rating;
     }

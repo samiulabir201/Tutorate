@@ -1,11 +1,12 @@
 package com.example.tutorate.model;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+//    @Column(name = "general_user_id")
     private int id;
     private String username;
     private String password;
@@ -55,16 +56,20 @@ public class User {
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Student student;
 
 
-    public Student getStudent() {
-        return student;
+
+
+
+    @OneToMany(mappedBy = "user")
+    Set<TutorRatingKey> tutorRatingKeySet;
+
+    public Set<TutorRatingKey> getTutorRatingKeySet() {
+        return tutorRatingKeySet;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setTutorRatingKeySet(Set<TutorRatingKey> tutorRatingKeySet) {
+        this.tutorRatingKeySet = tutorRatingKeySet;
     }
+
 }
