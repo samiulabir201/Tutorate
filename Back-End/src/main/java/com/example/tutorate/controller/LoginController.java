@@ -5,6 +5,7 @@ import com.example.tutorate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.example.tutorate.model.User;
 
@@ -28,8 +29,21 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public boolean login (@RequestBody User user, HttpServletRequest request) {
-         return userService.authenticate(user.getUsername(), user.getPassword());
+    public User login (@RequestBody User user, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if(userService.authenticate(user.getUsername(), user.getPassword()) == true) {
+            session.setAttribute("User", user.getUsername());
+            return user;
+        }
+         else
+             return null;
+    }
+
+    @PostMapping("/register")
+    public User register (@RequestBody User user, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("User", user.getUsername());
+        return userService.addNewUser(user);
     }
 
 //         if(tutorService.getTutorByName(tutor.getName())!=null){

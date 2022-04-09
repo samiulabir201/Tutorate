@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService{
             return false;
     }
 
-    public void addNewUser(User user) {
+    public User addNewUser(User user) {
         userRepository.save(user);
+        return user;
     }
 }

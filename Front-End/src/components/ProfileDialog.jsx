@@ -44,7 +44,9 @@ export const ProfileDialog = (props) => {
             body: JSON.stringify({username:user, password:password}),
         });
 
-        if (await res.json() === true) {
+        let userObject = await res.json();
+
+        if (userObject != null) {
             props.updateUser(user);
             props.onHide();
         }
@@ -61,6 +63,8 @@ export const ProfileDialog = (props) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username:user, password:password}),
         });
+
+        let userObject = await res.json();
         props.updateUser(user);
         props.onHide();
     }

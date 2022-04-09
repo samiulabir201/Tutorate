@@ -6,5 +6,5 @@ import java.util.List;
 public interface UserService {
     boolean userExists (String username);
     boolean authenticate (String username, String password);
-    void addNewUser (User user);
+    User addNewUser (User user);
 }
