@@ -81,4 +81,9 @@ public class TutorController {
     public List<String> getAllLocation() {
         return tutorRepository.getAllLocations().stream().distinct().collect(Collectors.toList());
     }
+
+    @GetMapping("/getAllGrades")
+    public List<String> getAllGrades() {
+        return tutorRepository.getAllGrades().stream().distinct().collect(Collectors.toList());
+    }
 }

@@ -16,4 +16,7 @@ public interface TutorRepository extends JpaRepository<Tutor, Integer> {
 
     @Query(value = "SELECT subjects FROM tutor_subjects", nativeQuery = true)
     List<String> getAllSubjects();
+
+    @Query(value = "SELECT grades FROM tutor_grades", nativeQuery = true)
+    List<String> getAllGrades();
 }
