@@ -30,16 +30,20 @@ export const AdvancedSearch = (props) => {
     >
       <div className="optionsContainer">
         <div className="d-inline-flex">
-          <p className="align-self-center me-5">Subjects:</p>&nbsp;&nbsp;<Subjects subjects={searchParams.subjects} onSubjectChange={(newSubjects) => setSubjects(newSubjects)} />
+          <p className="align-self-center me-5">Subjects:</p>&nbsp;&nbsp;
+          <Subjects allowNewValues={false} subjects={searchParams.subjects} onSubjectChange={(newSubjects) => setSubjects(newSubjects)} />
         </div>
         <div className="d-inline-flex">
-          <p className="align-self-center me-5">Grades:</p>&nbsp;&nbsp;<Grades grades={searchParams.grades} onGradeChange={(newGrades) => setGrades(newGrades)} />
+          <p className="align-self-center me-5">Grades:</p>&nbsp;&nbsp;
+          <Grades allowNewValues={false} grades={searchParams.grades} onGradeChange={(newGrades) => setGrades(newGrades)} />
         </div>
         <div className="d-inline-flex">
-          <p className="align-self-center me-5">Wages:</p><WageRange wages={searchParams.wages} onWageChange={(newWages) => setWages(newWages)} />
+          <p className="align-self-center me-5">Wages:</p>
+          <WageRange wages={searchParams.wages} onWageChange={(newWages) => setWages(newWages)} />
         </div>
         <div className="d-inline-flex">
-          <p className="align-self-center me-5">Ranking:</p><Ranking rank={searchParams.rank} onRankChange={(newRank) => setRank(newRank)} />
+          <p className="align-self-center me-5">Ranking:</p>
+          <Ranking rank={searchParams.rank} onRankChange={(newRank) => setRank(newRank)} />
         </div>
         <div className="d-inline-flex">
           <button className="button" type="button" onClick={updateParams}>Search</button>

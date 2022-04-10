@@ -5,6 +5,7 @@ export const Grades = (props) => {
     const options = ["Class 1", "Class 2"];
     return <Autocomplete
         multiple
+        freeSolo={props.allowNewValues}
         renderInput={(params) => <TextField {...params} label="Grades" />}
         options={options}
         defaultValue={props.grades}

@@ -13,6 +13,7 @@ export const Location = (props) => {
         setLocations(await res.json());
     })
     return <Autocomplete
+        freeSolo={props.allowNewValues}
         renderInput={(params) => <TextField {...params} label="Location" />}
         options={locations}
         onChange={(event, value) => {props.onLocationChange(value)}}

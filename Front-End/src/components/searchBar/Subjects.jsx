@@ -16,6 +16,7 @@ export const Subjects = (props) => {
 
   return <Autocomplete
       multiple
+      freeSolo={props.allowNewValues}
       renderInput={(params) => <TextField {...params} label="Subjects" />}
       options={subjects}
       defaultValue={props.subjects}

@@ -45,15 +45,15 @@ export const TutorProfileForm = (props) => {
                 </div>
                 <div className="d-inline-flex">
                     <p className="align-self-center me-5">Location:</p>&nbsp;&nbsp;
-                    <Location onLocationChange={setLocation} />
+                    <Location allowNewValues={true} onLocationChange={setLocation} />
                 </div>
                 <div className="d-inline-flex">
                     <p className="align-self-center me-5">Subjects:</p>&nbsp;&nbsp;
-                    <Subjects subjects={[]} onSubjectChange={setSubjects} />
+                    <Subjects allowNewValues={true} subjects={[]} onSubjectChange={setSubjects} />
                 </div>
                 <div className="d-inline-flex">
                     <p className="align-self-center me-5">Grades:</p>&nbsp;&nbsp;
-                    <Grades grades={[]} onGradeChange={setGrades} />
+                    <Grades allowNewValues={true} grades={[]} onGradeChange={setGrades} />
                 </div>
                 <div className="d-inline-flex">
                     <p className="align-self-center me-5">Wages:</p>
