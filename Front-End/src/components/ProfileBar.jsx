@@ -18,6 +18,7 @@ export const ProfileBar = () => {
             headers: {'Content-Type': 'application/json'},
         });
         setUser({});
+        localStorage.removeItem('user');
     }
 
     if (user.username === undefined) {

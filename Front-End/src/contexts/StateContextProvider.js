@@ -3,7 +3,8 @@ import React, { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+  const [user, setUser] = useState(storedUser ?? {});
   const [searchTerm, setSearchTerm] = useState('');
   const [searchParams, setSearchParams] = useState({});
 

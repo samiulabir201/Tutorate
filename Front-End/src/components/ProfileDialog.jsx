@@ -43,6 +43,7 @@ export const ProfileDialog = (props) => {
 
         if (userObject != null) {
             setUser(userObject);
+            localStorage.setItem('user', JSON.stringify(userObject));
             props.onHide();
         }
         else    setPasswordError("Incorrect Password!");
@@ -60,6 +61,7 @@ export const ProfileDialog = (props) => {
 
         if (userObject != null) {
             setUser(userObject);
+            localStorage.setItem('user', JSON.stringify(userObject));
             props.onHide();
         }
     }
