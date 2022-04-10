@@ -29,8 +29,14 @@ public class TutorServiceImpl implements TutorService{
         searchTerm = searchTerm.toLowerCase();
         List<Tutor> tutors = new ArrayList<>();
         for (Tutor tutor: tutorRepository.findAll()) {
-            String tutorName = tutor.getName().toLowerCase();
-            if (tutorName.startsWith(searchTerm) && searchParams.filter(tutor))
+            if (!searchParams.filter(tutor))    continue;
+
+            // search by name
+            if (tutor.getName().toLowerCase().startsWith(searchTerm))
+                tutors.add(tutor);
+
+            // search by location
+            else if (tutor.getLocation().toLowerCase().startsWith(searchTerm))
                 tutors.add(tutor);
         }
         return tutors;
