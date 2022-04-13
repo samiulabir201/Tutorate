@@ -54,7 +54,7 @@ export const ProfileBar = () => {
                         hidden={user.role === 'tutor'}
                         className="dropdown-item"
                         onClick={() => {setFormShown(true)}}>
-                        <i className="icon bi bi-box-arrow-left" />
+                        <i className="icon bi bi-pencil-square" />
                         Create Tutor Profile
                     </Dropdown.Item>
                     <TutorProfileForm show={formShown} onHide={() => setFormShown(false)}/>
@@ -62,7 +62,7 @@ export const ProfileBar = () => {
                         hidden={user.role === 'user'}
                         className="dropdown-item"
                         onClick={() => {}}>
-                        <i className="icon bi bi-box-arrow-left" />
+                        <i className="icon bi bi-person-circle" />
                         View Tutor Profile
                     </Dropdown.Item>
                     <Dropdown.Item
