@@ -17,9 +17,10 @@ export const Subjects = (props) => {
   return <Autocomplete
       multiple
       freeSolo={props.allowNewValues}
-      renderInput={(params) => <TextField {...params} label="Subjects" />}
+      renderInput={(params) => <TextField {...params} label="Subjects" required/>}
       options={subjects}
       defaultValue={props.subjects}
       onChange={(event, values) => props.onSubjectChange(values)}
+      fullWidth
   />
 };

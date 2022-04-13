@@ -5,6 +5,8 @@ import {Grades} from "./searchBar/Grades";
 import {Location} from "./Location";
 import "../stylesheets/TutorProfileForm.css";
 import {useStateContext} from "../contexts/StateContextProvider";
+import Grid from "@mui/material/Grid";
+import TextField from '@mui/material/TextField';
 
 export const TutorProfileForm = (props) => {
     const {user, setUser} = useStateContext();
@@ -34,32 +36,36 @@ export const TutorProfileForm = (props) => {
             className="TutorProfileForm"
             overlayClassName="TutorProfileFormOverlay"
         >
+            <h3 className="fs-2 heading text-center">Create a Tutor Profile</h3>
             <form onSubmit={createProfile} className="optionsContainer">
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Name:</p>&nbsp;&nbsp;
-                    <input name="name" type="text" onChange={(event) => setName(event.target.value)}/>
-                </div>
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Phone:</p>&nbsp;&nbsp;
-                    <input name="phone" type="text" onChange={(event) => setPhone(event.target.value)}/>
-                </div>
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Location:</p>&nbsp;&nbsp;
-                    <Location allowNewValues={true} onLocationChange={setLocation} />
-                </div>
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Subjects:</p>&nbsp;&nbsp;
-                    <Subjects allowNewValues={true} subjects={[]} onSubjectChange={setSubjects} />
-                </div>
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Grades:</p>&nbsp;&nbsp;
-                    <Grades allowNewValues={true} grades={[]} onGradeChange={setGrades} />
-                </div>
-                <div className="d-inline-flex">
-                    <p className="align-self-center me-5">Wages:</p>
-                    <input name="wage" type="number" onChange={(event) => setWage(event.target.value)}/>
-                </div>
-                <div className="d-inline-flex">
+                <Grid container spacing={4}>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <TextField fullWidth required name="name" label="Name"
+                            onChange={(event) => setName(event.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <TextField fullWidth required name="phone" label="Phone" type="number"
+                            onChange={(event) => setPhone(event.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <Location allowNewValues={true} onLocationChange={setLocation} />
+                    </Grid>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <TextField
+                            fullWidth name="wage" label="Wages" type="number"
+                            onChange={(event) => setWage(event.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <Subjects allowNewValues={true} subjects={[]} onSubjectChange={setSubjects} />
+                    </Grid>
+                    <Grid item xs={6} className="d-inline-flex">
+                        <Grades allowNewValues={true} grades={[]} onGradeChange={setGrades} />
+                    </Grid>
+                </Grid>
+                <div className="d-inline-flex mx-auto mt-3">
                     <button className="button" type="submit">Submit</button>
                     <button className="button" type="button" onClick={() => props.onHide()}>Cancel</button>
                 </div>

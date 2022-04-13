@@ -16,9 +16,10 @@ export const Grades = (props) => {
     return <Autocomplete
         multiple
         freeSolo={props.allowNewValues}
-        renderInput={(params) => <TextField {...params} label="Grades" />}
+        renderInput={(params) => <TextField {...params} label="Grades" required/>}
         options={grades}
         defaultValue={props.grades}
         onChange={(event, values) => props.onGradeChange(values)}
+        fullWidth
         />
 };

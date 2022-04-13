@@ -7,9 +7,9 @@
     margin: auto;
     width: fit-content;
     height: fit-content;
-
     border: 2px solid #1f252d;
     border-radius: 10px;
+    background-color: #fafafa;
 }
 
 .TutorProfileFormOverlay {
@@ -21,15 +21,18 @@
     background-color: rgba(243, 244, 246, 0.8);
 }
 
+.TutorProfileForm .heading {
+    padding: 40px 70px 50px 70px;
+}
+
 .TutorProfileForm .optionsContainer {
     width: 700px;
     height: 460px;
     margin: auto;
-    padding: 20px;
+    padding: 0px 70px 70px 70px;
     justify-content: center;
     align-items: center;
     display: grid;
-    background-color: white;
     border-radius: 10px;
 }
 
