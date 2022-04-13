@@ -1,9 +1,9 @@
 package com.example.tutorate.model;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Tutor {
@@ -19,6 +19,12 @@ public class Tutor {
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
+
+    @OneToOne(mappedBy = "tutor")
+    private User user;
+
+    @OneToMany(mappedBy = "tutor")
+    Set<TutorRatingKey> tutorRatingKeys;
   
     public Tutor() {}
 
@@ -84,5 +90,31 @@ public class Tutor {
 
     public void setMin_wage(int min_wage) {
         this.min_wage = min_wage;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<TutorRatingKey> getTutorRatingKeys() {
+        return tutorRatingKeys;
+    }
+
+    public void setTutorRatingKeys(Set<TutorRatingKey> ratingKeys) {
+        this.tutorRatingKeys = ratingKeys;
+    }
+
+    public void calculateAverageRating(){
+        int average_rate=0;
+
+        for(TutorRatingKey keys:tutorRatingKeys){
+           average_rate+= keys.getRate();
+        }
+        average_rate/=tutorRatingKeys.size();
+        setRating(average_rate);
     }
 }

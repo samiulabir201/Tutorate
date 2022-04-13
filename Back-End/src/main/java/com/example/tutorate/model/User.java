@@ -1,16 +1,22 @@
 package com.example.tutorate.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String username;
     private String password;
     @Enumerated
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="tutor_id")
+    private Tutor tutor;
+    @OneToMany(mappedBy = "user")
+    Set<TutorRatingKey> tutorRatingKeySet;
 
     public User() {
         role = Role.user;
@@ -46,5 +52,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    public Set<TutorRatingKey> getTutorRatingKeySet() {
+        return tutorRatingKeySet;
+    }
+
+    public void setTutorRatingKeySet(Set<TutorRatingKey> tutorRatingKeySet) {
+        this.tutorRatingKeySet = tutorRatingKeySet;
     }
 }

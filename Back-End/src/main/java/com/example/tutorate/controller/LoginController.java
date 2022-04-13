@@ -12,14 +12,13 @@ import com.example.tutorate.model.User;
 @RestController
 @RequestMapping("/user")
 public class LoginController {
-
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/checkUser")
-    public boolean checkUser (@RequestBody User user, HttpServletRequest request) {
+    public boolean checkUser(@RequestBody User user) {
         return userService.userExists(user.getUsername());
     }
 
@@ -30,7 +29,7 @@ public class LoginController {
             session.setAttribute("User", user.getUsername());
             return userRepository.findByUsername(user.getUsername());
         }
-         else   return null;
+        else   return null;
     }
 
     @PostMapping("/register")
