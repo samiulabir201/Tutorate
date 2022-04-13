@@ -20,9 +20,7 @@ public class Tutor {
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "tutor")
     private User user;
 
     @OneToMany(mappedBy = "tutor")

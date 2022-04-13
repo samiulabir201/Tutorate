@@ -12,6 +12,11 @@ public class User {
     private String password;
     @Enumerated
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="tutor_id")
+    private Tutor tutor;
+    @OneToMany(mappedBy = "user")
+    Set<TutorRatingKey> tutorRatingKeySet;
 
     public User() {
         role = Role.user;
@@ -49,10 +54,6 @@ public class User {
         this.role = role;
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Tutor tutor;
-
     public Tutor getTutor() {
         return tutor;
     }
@@ -60,9 +61,6 @@ public class User {
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
-
-    @OneToMany(mappedBy = "user")
-    Set<TutorRatingKey> tutorRatingKeySet;
 
     public Set<TutorRatingKey> getTutorRatingKeySet() {
         return tutorRatingKeySet;
