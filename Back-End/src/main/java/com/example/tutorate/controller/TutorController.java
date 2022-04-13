@@ -86,6 +86,4 @@ public class TutorController {
     public List<String> getAllGrades() {
         return tutorRepository.getAllGrades().stream().distinct().collect(Collectors.toList());
     }
-
-
 }

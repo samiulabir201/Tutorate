@@ -9,14 +9,15 @@ import java.io.Serializable;
 public class TutorRatingKey  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "rating_id")
     int id;
     @ManyToOne
     @JoinColumn(name = "id")
     User user;
     @ManyToOne
-    @JoinColumn(name = "tutor_id")
+    @JoinColumn(name = "id")
     Tutor tutor;
+    int rate;
+
     public TutorRatingKey(){
 
     }
@@ -26,8 +27,6 @@ public class TutorRatingKey  {
         this.tutor=tutor;
         this.rate=rate;
     }
-
-    int rate;
 
     public void setId(int id) {
         this.id = id;
