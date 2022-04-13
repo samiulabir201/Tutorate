@@ -1,5 +1,7 @@
 package com.example.tutorate.model;
 
+import org.springframework.data.domain.Range;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -43,7 +45,8 @@ public class SearchParams {
     }
 
     public boolean filter(Tutor tutor) {
-        if (wages != null && tutor.getMin_wage() > wages[1])    return false;
+        if (wages != null && !Range.closed(wages[0], wages[1]).contains(tutor.getMin_wage()))
+            return false;
         if (subjects != null && subjects.length > 0 && Collections.disjoint(List.of(subjects), tutor.getSubjects()))
             return false;
         if (grades != null && grades.length > 0 && Collections.disjoint(List.of(grades), tutor.getGrades()))
