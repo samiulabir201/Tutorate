@@ -27,10 +27,18 @@
     padding: 0px;
 }
 
-.profileOptions .btn-primary {
+.profileOptions .btn-primary, .profileOptions .btn-primary:focus {
     background: transparent;
     border: none;
     color: #1f252d;
+    box-shadow: none;
+}
+
+.show>.btn-primary.dropdown-toggle, .show>.btn-primary.dropdown-toggle:focus {
+    background: transparent;
+    border: none;
+    color: #1f252d;
+    box-shadow: none;
 }
 
 .profileOptions .dropdown-toggle::after {
