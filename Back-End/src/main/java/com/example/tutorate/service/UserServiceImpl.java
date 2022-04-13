@@ -7,20 +7,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService{
-@Autowired
+    @Autowired
     UserRepository userRepository;
 
-@Override
+    @Override
     public User getUserByName(String username){
     User searched_user=new User();
-//    searched_user.setName("never");
-    for(User user:userRepository.findAll()){
-        String tutorName=user.getUsername();
-        if(tutorName.equals(username)){
-            searched_user=user;
-            return searched_user;
+        for(User user:userRepository.findAll()){
+            String tutorName=user.getUsername();
+            if(tutorName.equals(username)){
+                searched_user=user;
+                return searched_user;
+            }
         }
+        return searched_user;
     }
-    return searched_user;
-}
+
+    public boolean userExists(String username) {
+        User user = userRepository.findByUsername(username);
+        return user != null;
+    }
+
+    public boolean authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        return password.equals(user.getPassword());
+    }
+
+    public User addNewUser(User user) {
+        userRepository.save(user);
+        return userRepository.findByUsername(user.getUsername());
+    }
 }

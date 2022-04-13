@@ -27,14 +27,23 @@
     padding: 0px;
 }
 
+.profileOptions .btn-primary {
+    background: transparent;
+    border: none;
+    color: #1f252d;
+}
+
+.profileOptions .dropdown-toggle::after {
+    display: none;
+}
+
 .profileOptions .dropdown-menu {
     background-color: rgb(191 219 254);
     height: fit-content;
     min-width: 100px;
-    max-width: 100px;
     max-height: 200px;
     padding: 5px;
-    margin-left: 5px;
+    margin-left: -50px;
 }
 
 .profileOptions .dropdown-item {

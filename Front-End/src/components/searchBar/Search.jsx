@@ -6,8 +6,9 @@ import { AdvancedSearch } from './AdvancedSearch';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export const Search = () => {
-  const { setSearchTerm, setAdvancedSearch } = useStateContext();
+  const { setSearchTerm } = useStateContext();
   const [text, setText] = useState('');
+  const [advancedSearchShown, setAdvancedSearchShown] = useState(false);
   const [debouncedValue] = useDebounce(text, 300);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export const Search = () => {
   }, [debouncedValue]);
 
   return (
-    <div className="relative sm:ml-48 md:ml-72 sm:-mt-10 mt-3">
+    <div className="relative ">
       <input
         value={text}
         type="text"
@@ -24,14 +25,14 @@ export const Search = () => {
         onChange={(e) => setText(e.target.value)}
       />
       {text !== '' && (
-        <button type="button" className="absolute top-3x.5 right-4 text-l text-gray-500 " onClick={() => setText('')}>
+        <button type="button" className="absolute top-3 right-16" onClick={() => setText('')}>
           ❌
         </button>
       )}
-      <button type="button" onClick={() => setAdvancedSearch(true)}>
-        <i className="bi bi-funnel" />
+      <button type="button" onClick={() => {setAdvancedSearchShown(true)}}>
+        <i className="ml-5 fs-4 bi bi-funnel" />
       </button>
-      <AdvancedSearch />
+      <AdvancedSearch show={advancedSearchShown} onHide={() => setAdvancedSearchShown(false)}/>
     </div>
   );
 };

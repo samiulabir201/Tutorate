@@ -1,24 +1,32 @@
 package com.example.tutorate.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Tutor {
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String password;
-    private int min_wage;
-    private int role;
-    private int averageRating;
-    /*
-    * Element collection enables subjects to be stored in another table according to id but can be
-    * called with Tutor itself*/
+    private float rating;
+    private String location;
+    private String phone;
     @ElementCollection
-    private List<String> subjects;
+    private List<String> grades = new ArrayList<>();
+    @ElementCollection
+    private List<String> subjects = new ArrayList<>();
+    private int min_wage;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private User user;
+
+    @OneToMany(mappedBy = "tutor")
+    Set<TutorRatingKey> tutorRatingKeys;
   
     public Tutor() {}
 
@@ -38,20 +46,36 @@ public class Tutor {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public float getRating() {
+        return rating;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-  
-    public int getMin_wage() {
-        return min_wage;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
-    public void setMin_wage(int min_wage) {
-        this.min_wage = min_wage;
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<String> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<String> grades) {
+        this.grades = grades;
     }
 
     public List<String> getSubjects() {
@@ -62,19 +86,13 @@ public class Tutor {
         this.subjects = subjects;
     }
 
-
-    public int getRole() {
-        return role;
+    public int getMin_wage() {
+        return min_wage;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setMin_wage(int min_wage) {
+        this.min_wage = min_wage;
     }
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public User getUser() {
         return user;
@@ -84,9 +102,6 @@ public class Tutor {
         this.user = user;
     }
 
-@OneToMany(mappedBy = "tutor")
-    Set<TutorRatingKey> tutorRatingKeys;
-
     public Set<TutorRatingKey> getTutorRatingKeys() {
         return tutorRatingKeys;
     }
@@ -95,22 +110,13 @@ public class Tutor {
         this.tutorRatingKeys = ratingKeys;
     }
 
-    public int getAverageRating() {
-        return averageRating;
-    }
-
-    public void setAverageRating(int averageRating) {
-        this.averageRating = averageRating;
-    }
-
     public void calculateAverageRating(){
         int average_rate=0;
 
         for(TutorRatingKey keys:tutorRatingKeys){
            average_rate+= keys.getRate();
-
         }
         average_rate/=tutorRatingKeys.size();
-        setAverageRating(average_rate);
+        setRating(average_rate);
     }
 }

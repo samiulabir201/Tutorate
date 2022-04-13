@@ -3,28 +3,67 @@ import ReactModal from "react-modal";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../stylesheets/ProfileDialog.css";
 import md5 from "md5";
+import {useStateContext} from "../contexts/StateContextProvider";
 
 export const ProfileDialog = (props) => {
-    const [user, setUser] = useState('');
+    const {user, setUser} = useStateContext();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [userError, setUserError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [showLogin, setShowLogin] = useState(true);
+
+    const checkUser = async () => {
+        const res = await fetch(`http://localhost:8080/user/checkUser`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password}),
+        });
+
+        if (showLogin) {
+            if (await res.json() === true)  await login();
+            else  setUserError("User doesn't exist!");
+        }
+        else {
+            if (await res.json() === true)  setUserError("Username already exists!");
+            else    await register();
+        }
+    }
 
     const login = async () => {
         const res = await fetch(`http://localhost:8080/user/login`, {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({user:user, password:password}),
+            body: JSON.stringify({username, password}),
         });
-        props.updateUser(user);
-        props.onHide();
-        // TODO - check for invalid login details
+
+        let userObject = await res.json();
+
+        if (userObject != null) {
+            setUser(userObject);
+            localStorage.setItem('user', JSON.stringify(userObject));
+            props.onHide();
+        }
+        else    setPasswordError("Incorrect Password!");
     }
 
-    const register = () => {
+    const register = async () => {
+        const res = await fetch(`http://localhost:8080/user/register`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password}),
+        });
 
+        let userObject = await res.json();
+
+        if (userObject != null) {
+            setUser(userObject);
+            localStorage.setItem('user', JSON.stringify(userObject));
+            props.onHide();
+        }
     }
 
     const handleSubmit = (event) => {
@@ -39,9 +78,7 @@ export const ProfileDialog = (props) => {
             setPasswordError("Please enter a password." );
             return;
         }
-
-        if (showLogin) login();
-        else register();
+        checkUser();
     };
 
     const handleDialogSwitch = () => {
@@ -66,7 +103,7 @@ export const ProfileDialog = (props) => {
                             className="inputProfileInfo"
                             name="email"
                             type="text"
-                            onChange={(event) => setUser(event.target.value)}
+                            onChange={(event) => setUsername(event.target.value)}
                         />
                         <p className="error">{userError}</p>
                     </label>
@@ -97,8 +134,7 @@ export const ProfileDialog = (props) => {
                     &nbsp;
                     <button
                         class="dialogSwitchButton"
-                        onClick={() => handleDialogSwitch()}
-                    >
+                        onClick={() => handleDialogSwitch()}>
                         {showLogin ? "Sign up" : "Log in"}
                     </button>
                 </div>
