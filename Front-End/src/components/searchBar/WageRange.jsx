@@ -3,8 +3,8 @@ import { Slider } from '@mui/material';
 
 export const WageRange = (props) => {
   const marks = [
-    { value: 0, label: '$ 0.00' },
-    { value: 10000, label: '$ 10,000.00' },
+    { value: 0, label: '৳0.00' },
+    { value: 10000, label: '৳10,000.00' },
   ];
 
   return (

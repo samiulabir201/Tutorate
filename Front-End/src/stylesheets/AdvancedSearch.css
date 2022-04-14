@@ -7,9 +7,9 @@
     margin: auto;
     width: fit-content;
     height: fit-content;
-
     border: 2px solid #1f252d;
     border-radius: 10px;
+    background-color: #fafafa;
 }
 
 .AdvancedSearchOverlay {
@@ -21,15 +21,17 @@
     background-color: rgba(243, 244, 246, 0.8);
 }
 
+.AdvancedSearch .title {
+    padding: 40px 50px 30px 50px;
+}
+
 .AdvancedSearch .optionsContainer {
-    width: 700px;
-    height: 460px;
+    width: 600px;
     margin: auto;
-    padding: 20px;
+    padding: 0px 50px 40px 50px;
     justify-content: center;
     align-items: center;
     display: grid;
-    background-color: white;
     border-radius: 10px;
 }
 
