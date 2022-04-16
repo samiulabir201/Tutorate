@@ -32,9 +32,7 @@ public class TutorController {
     @PostMapping("/add")
     public User add(@RequestBody Tutor tutor, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
-        System.out.println(request.getSession());
         User user = userRepository.findByUsername(username);
-        System.out.println(user.getUsername());
         user.setRole(Role.tutor);
         user.setTutor(tutor);
         //tutorService.saveTutor(tutor);
@@ -99,35 +97,26 @@ public class TutorController {
     @GetMapping("/rate")
     public float rate( @RequestParam int tutor_id, @RequestParam ArrayList<Integer>list,HttpServletRequest request) {
         HttpSession session=request.getSession();
-        System.out.println(session.getAttribute("User"));
         
-        User user= (User) userRepository.findByUsername((String) session.getAttribute("User"));
+        User user=userRepository.findByUsername((String) session.getAttribute("User"));
         
        if(session.getAttribute("User")!=null){
-        if (!ratingService.findRated(user.getId(), tutor_id)) {
-            Tutor selected_tutor = tutorRepository.findById(tutor_id);
-            
-            if(user.getRole()!=Role.tutor) {
-                TutorRatingKey tutorRatingKey = new TutorRatingKey(user, selected_tutor, list);
-                tutorRatingKey.setRate(tutorRatingKey.calculateRate());
-                ratingRepository.save(tutorRatingKey);
-                //selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
+           if (!ratingService.findRated(user.getId(), tutor_id)) {
+               Tutor selected_tutor = tutorRepository.findById(tutor_id);
 
-                selected_tutor.setAverage_rating(tutorService.calculateAverageRating(tutor_id));
-
-                tutorRepository.save(selected_tutor);
-
-
-                return selected_tutor.getAverage_rating();
+               if(user.getRole()!=Role.tutor) {
+                   TutorRatingKey tutorRatingKey = new TutorRatingKey(user, selected_tutor, list);
+                    tutorRatingKey.setRate(tutorRatingKey.calculateRate());
+                    ratingRepository.save(tutorRatingKey);
+                    //selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
+                    selected_tutor.setAverage_rating(tutorService.calculateAverageRating(tutor_id));
+                    tutorRepository.save(selected_tutor);
+                    return selected_tutor.getAverage_rating();
+                }
+                else return -2;
             }
-            else return -2;
-        }
        }
-       else
-       {
-           return -1;
-       }
-
-        return 0;
+       else return -1;
+       return 0;
     }
 }

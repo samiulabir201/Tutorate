@@ -61,6 +61,4 @@ public class User {
     public void setTutor(Tutor tutor) {
         this.tutor = tutor;
     }
-
-
 }

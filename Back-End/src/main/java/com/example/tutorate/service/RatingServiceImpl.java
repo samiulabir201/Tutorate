@@ -21,13 +21,9 @@ public class RatingServiceImpl implements RatingService{
         for(TutorRatingKey ratingKey:ratingRepository.findAll()){
             User user=ratingKey.getUser();
             Tutor tutor=ratingKey.getTutor();
-            if(user.getId()==userId && tutor.getId()==TutorId){
+            if(user.getId()==userId && tutor.getId()==TutorId)
                 return true;
-
-            }
-
         }
-
         return false;
     }
 ////
@@ -50,7 +46,4 @@ public class RatingServiceImpl implements RatingService{
 //
 //        return tutor;
 //    }
-
-
-
 }

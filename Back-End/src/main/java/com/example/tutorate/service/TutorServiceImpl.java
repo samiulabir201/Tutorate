@@ -46,15 +46,14 @@ public class TutorServiceImpl implements TutorService{
     * */
     @Override
     public  Tutor getTutorByName(String username){
-        System.out.println("Username "+username);
         Tutor searched_tutor=new Tutor();
         searched_tutor.setName("never");
         for(Tutor tutor:tutorRepository.findAll()){
-        String tutorName=tutor.getName();
-        if(tutorName.equals(username)){
-            searched_tutor=tutor;
-            return searched_tutor;
-        }
+            String tutorName=tutor.getName();
+            if(tutorName.equals(username)){
+                searched_tutor=tutor;
+                return searched_tutor;
+            }
         }
         return searched_tutor;
     }
@@ -66,21 +65,15 @@ public class TutorServiceImpl implements TutorService{
     @Override
     public boolean sessionCheck(HttpServletRequest request){
         HttpSession session =request.getSession();
-        if(session.getAttribute("Session token")==null){
+        if(session.getAttribute("Session token")==null)
             return false;
-        }
-        if(session.getAttribute("Session token").equals(request.getSession())){
+        if(session.getAttribute("Session token").equals(request.getSession()))
             return true;
-        }
-        else
-            return false;
-
+        else    return false;
     }
 
     @Override
     public float calculateAverageRating(int id) {
       return   tutorRepository.getAverageRating(id);
     }
-
-
 }
