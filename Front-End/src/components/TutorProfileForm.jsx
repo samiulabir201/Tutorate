@@ -66,10 +66,10 @@ export const TutorProfileForm = (props) => {
                         />
                     </Grid>
                     <Grid item xs={6} className="d-inline-flex">
-                        <Subjects allowNewValues={true} subjects={[]} onSubjectChange={setSubjects} />
+                        <Subjects required allowNewValues={true} subjects={[]} onSubjectChange={setSubjects} />
                     </Grid>
                     <Grid item xs={6} className="d-inline-flex">
-                        <Grades allowNewValues={true} grades={[]} onGradeChange={setGrades} />
+                        <Grades required allowNewValues={true} grades={[]} onGradeChange={setGrades} />
                     </Grid>
                 </Grid>
                 <div className="d-inline-flex mx-auto mt-3">
