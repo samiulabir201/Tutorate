@@ -19,8 +19,8 @@ public class Tutor {
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
 
-    @OneToOne(mappedBy = "tutor")
-    private User user;
+
+//    private User user;
 
 //    @OneToMany(mappedBy = "tutor")
 //    Set<TutorRatingKey> tutorRatingKeys;
@@ -91,13 +91,13 @@ public class Tutor {
         this.min_wage = min_wage;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
 //        public Set<TutorRatingKey> getTutorRatingKeys() {
 //        return tutorRatingKeys;
