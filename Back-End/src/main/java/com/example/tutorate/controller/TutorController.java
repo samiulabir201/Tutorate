@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,13 @@ public class TutorController {
     @PostMapping("/add")
     public User add(@RequestBody Tutor tutor, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
+        System.out.println(request.getSession());
         User user = userRepository.findByUsername(username);
+        System.out.println(user.getUsername());
         user.setRole(Role.tutor);
-        tutorService.saveTutor(tutor);
+        user.setTutor(tutor);
+        //tutorService.saveTutor(tutor);
+        userRepository.save(user);
         return user;
     }
   
@@ -71,7 +76,8 @@ public class TutorController {
     }
 
     @GetMapping("/{id}")
-        public Tutor getTutorDetail(@PathVariable int id){
+        public Tutor getTutorDetail(@PathVariable int id,HttpServletRequest request){
+        System.out.println(request.getSession());
         return tutorRepository.findById(id);
     }
 
@@ -91,22 +97,37 @@ public class TutorController {
     }
 
     @GetMapping("/rate")
-    public int rate(@RequestParam int student_id, @RequestParam int tutor_id,@RequestParam int rating) {
-        if (!ratingService.findRated(student_id, tutor_id)) {
+    public int rate( @RequestParam int tutor_id, @RequestParam ArrayList<Integer>list,HttpServletRequest request) {
+        HttpSession session=request.getSession();
+        System.out.println(session.getAttribute("User"));
+        
+        User user= (User) userRepository.findByUsername((String) session.getAttribute("User"));
+        
+       if(session.getAttribute("User")!=null){
+        if (!ratingService.findRated(user.getId(), tutor_id)) {
             Tutor selected_tutor = tutorRepository.findById(tutor_id);
-            User selected_user = userRepository.findById(student_id);
-            TutorRatingKey tutorRatingKey = new TutorRatingKey(selected_user, selected_tutor, rating);
+            
+            if(user.getRole()!=Role.tutor) {
+                TutorRatingKey tutorRatingKey = new TutorRatingKey(user, selected_tutor, list);
+                tutorRatingKey.setRate(tutorRatingKey.calculateRate());
+                user = ratingService.addRatingRecordStudent(user, tutorRatingKey);
+                selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
 
-            selected_user = ratingService.addRatingRecordStudent(selected_user, tutorRatingKey);
-            selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
+                selected_tutor.calculateAverageRating();
+                ratingRepository.save(tutorRatingKey);
+                tutorRepository.save(selected_tutor);
+                userRepository.save(user);
 
-            selected_tutor.calculateAverageRating();
-            ratingRepository.save(tutorRatingKey);
-            tutorRepository.save(selected_tutor);
-            userRepository.save(selected_user);
-
-            return rating;
+                return tutorRatingKey.calculateRate();
+            }
+            else return -2;
         }
+       }
+       else
+       {
+           return -1;
+       }
+
         return 0;
     }
 }

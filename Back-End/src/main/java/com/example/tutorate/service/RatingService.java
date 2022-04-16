@@ -10,4 +10,5 @@ public interface RatingService {
      boolean findRated(int studentId,int TutorId);
      User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey);
     Tutor addRatingRecordTutor(Tutor tutor,TutorRatingKey tutorRatingKey);
+
 }

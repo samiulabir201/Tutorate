@@ -27,6 +27,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         if(userService.authenticate(user.getUsername(), user.getPassword())) {
             session.setAttribute("User", user.getUsername());
+            System.out.println(request.getSession());
             return userRepository.findByUsername(user.getUsername());
         }
         else   return null;
