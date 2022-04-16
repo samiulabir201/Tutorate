@@ -3,7 +3,6 @@ package com.example.tutorate.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Tutor {
@@ -11,7 +10,7 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private float rating;
+    private float average_rating;
     private String location;
     private String phone;
     @ElementCollection
@@ -20,11 +19,11 @@ public class Tutor {
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
 
-    @OneToOne(mappedBy = "tutor")
-    private User user;
 
-    @OneToMany(mappedBy = "tutor")
-    Set<TutorRatingKey> tutorRatingKeys;
+//    private User user;
+
+//    @OneToMany(mappedBy = "tutor")
+//    Set<TutorRatingKey> tutorRatingKeys;
   
     public Tutor() {}
 
@@ -44,12 +43,12 @@ public class Tutor {
         this.name = name;
     }
 
-    public float getRating() {
-        return rating;
+    public float getAverage_rating() {
+        return average_rating;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
+    public void setAverage_rating(float rating) {
+        this.average_rating = rating;
     }
 
     public String getLocation() {
@@ -92,29 +91,29 @@ public class Tutor {
         this.min_wage = min_wage;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
-    public Set<TutorRatingKey> getTutorRatingKeys() {
-        return tutorRatingKeys;
-    }
+//        public Set<TutorRatingKey> getTutorRatingKeys() {
+//        return tutorRatingKeys;
+//    }
+//
+//    public void setTutorRatingKeys(Set<TutorRatingKey> ratingKeys) {
+//        this.tutorRatingKeys = ratingKeys;
+//    }
 
-    public void setTutorRatingKeys(Set<TutorRatingKey> ratingKeys) {
-        this.tutorRatingKeys = ratingKeys;
-    }
-
-    public void calculateAverageRating(){
-        int average_rate=0;
-
-        for(TutorRatingKey keys:tutorRatingKeys){
-           average_rate+= keys.getRate();
-        }
-        average_rate/=tutorRatingKeys.size();
-        setRating(average_rate);
-    }
+//    public void calculateAverageRating(){
+//        int average_rate=0;
+//
+//        for(TutorRatingKey keys:tutorRatingKeys){
+//           average_rate+= keys.getRate();
+//        }
+//        average_rate/=tutorRatingKeys.size();
+//        setRating(average_rate);
+//    }
 }

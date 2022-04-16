@@ -21,34 +21,29 @@ public class RatingServiceImpl implements RatingService{
         for(TutorRatingKey ratingKey:ratingRepository.findAll()){
             User user=ratingKey.getUser();
             Tutor tutor=ratingKey.getTutor();
-            if(user.getId()==userId && tutor.getId()==TutorId){
+            if(user.getId()==userId && tutor.getId()==TutorId)
                 return true;
-
-            }
-
         }
-
         return false;
     }
+////
+////    @Override
+////    public User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey) {
+//////        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
+////        tutorRatingKeySetStudent.add(tutorRatingKey);
+////        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
+//
+//
+//
+//        return user;
+//    }
 
-    @Override
-    public User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey) {
-        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
-        tutorRatingKeySetStudent.add(tutorRatingKey);
-        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
-
-
-
-        return user;
-    }
-
-    @Override
-    public Tutor addRatingRecordTutor(Tutor tutor, TutorRatingKey tutorRatingKey) {
-        Set<TutorRatingKey> tutorRatingKeySetTutor=tutor.getTutorRatingKeys();
-        tutorRatingKeySetTutor.add(tutorRatingKey);
-        tutor.setTutorRatingKeys(tutorRatingKeySetTutor);
-
-        return tutor;
-    }
-
+//    @Override
+//    public Tutor addRatingRecordTutor(Tutor tutor, TutorRatingKey tutorRatingKey) {
+//        Set<TutorRatingKey> tutorRatingKeySetTutor=tutor.getTutorRatingKeys();
+//        tutorRatingKeySetTutor.add(tutorRatingKey);
+//        tutor.setTutorRatingKeys(tutorRatingKeySetTutor);
+//
+//        return tutor;
+//    }
 }

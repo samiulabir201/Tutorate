@@ -4,6 +4,8 @@ package com.example.tutorate.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class TutorRatingKey  {
@@ -11,22 +13,31 @@ public class TutorRatingKey  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "fk_user")
     User user;
     @ManyToOne
-    @JoinColumn(name = "tutor_id")
+    @JoinColumn(name = "fk_tutor")
     Tutor tutor;
     int rate;
+    int punctuality;
+    int effectiveness;
+    int clear_understanding;
+    int patience;
 
     public TutorRatingKey(){
 
     }
 
-    public TutorRatingKey(User user,Tutor tutor,int rate){
+    public TutorRatingKey(User user, Tutor tutor, ArrayList<Integer> list){
         this.user=user;
         this.tutor=tutor;
-        this.rate=rate;
+        this.punctuality= list.get(0);
+        this.effectiveness=list.get(1);
+        this.clear_understanding=list.get(2);
+        this.patience=list.get(3);
     }
+
+
 
     public void setId(int id) {
         this.id = id;
@@ -59,4 +70,10 @@ public class TutorRatingKey  {
     public int getId() {
         return id;
     }
+
+    public int calculateRate(){
+        rate=1*this.punctuality+2*this.patience+3*this.clear_understanding+4*this.effectiveness;
+        return rate;
+    }
+
 }
