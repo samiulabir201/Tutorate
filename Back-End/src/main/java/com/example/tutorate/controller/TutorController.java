@@ -76,8 +76,8 @@ public class TutorController {
     }
 
     @GetMapping("/{id}")
-        public Tutor getTutorDetail(@PathVariable int id,HttpServletRequest request){
-        System.out.println(request.getSession());
+        public Tutor getTutorDetail(@PathVariable int id){
+
         return tutorRepository.findById(id);
     }
 
