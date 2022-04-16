@@ -13,10 +13,10 @@ public class TutorRatingKey  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "fk_user")
     User user;
     @ManyToOne
-    @JoinColumn(name = "tutor_id")
+    @JoinColumn(name = "fk_tutor")
     Tutor tutor;
     int rate;
     int punctuality;

@@ -110,13 +110,13 @@ public class TutorController {
             if(user.getRole()!=Role.tutor) {
                 TutorRatingKey tutorRatingKey = new TutorRatingKey(user, selected_tutor, list);
                 tutorRatingKey.setRate(tutorRatingKey.calculateRate());
-                user = ratingService.addRatingRecordStudent(user, tutorRatingKey);
+
                 selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
 
                 selected_tutor.calculateAverageRating();
                 ratingRepository.save(tutorRatingKey);
                 tutorRepository.save(selected_tutor);
-                userRepository.save(user);
+
 
                 return tutorRatingKey.calculateRate();
             }

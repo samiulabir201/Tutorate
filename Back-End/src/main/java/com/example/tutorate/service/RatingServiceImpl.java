@@ -33,9 +33,9 @@ public class RatingServiceImpl implements RatingService{
 
     @Override
     public User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey) {
-        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
-        tutorRatingKeySetStudent.add(tutorRatingKey);
-        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
+//        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
+//        tutorRatingKeySetStudent.add(tutorRatingKey);
+//        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
 
 
 
