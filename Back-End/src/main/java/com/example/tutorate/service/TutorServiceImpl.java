@@ -4,6 +4,7 @@ import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,5 +76,11 @@ public class TutorServiceImpl implements TutorService{
             return false;
 
     }
+
+    @Override
+    public float calculateAverageRating(int id) {
+      return   tutorRepository.getAverageRating(id);
+    }
+
 
 }

@@ -97,7 +97,7 @@ public class TutorController {
     }
 
     @GetMapping("/rate")
-    public int rate( @RequestParam int tutor_id, @RequestParam ArrayList<Integer>list,HttpServletRequest request) {
+    public float rate( @RequestParam int tutor_id, @RequestParam ArrayList<Integer>list,HttpServletRequest request) {
         HttpSession session=request.getSession();
         System.out.println(session.getAttribute("User"));
         
@@ -110,15 +110,15 @@ public class TutorController {
             if(user.getRole()!=Role.tutor) {
                 TutorRatingKey tutorRatingKey = new TutorRatingKey(user, selected_tutor, list);
                 tutorRatingKey.setRate(tutorRatingKey.calculateRate());
-
-                selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
-
-                selected_tutor.calculateAverageRating();
                 ratingRepository.save(tutorRatingKey);
+                //selected_tutor = ratingService.addRatingRecordTutor(selected_tutor, tutorRatingKey);
+
+                selected_tutor.setAverage_rating(tutorService.calculateAverageRating(tutor_id));
+
                 tutorRepository.save(selected_tutor);
 
 
-                return tutorRatingKey.calculateRate();
+                return selected_tutor.getAverage_rating();
             }
             else return -2;
         }
