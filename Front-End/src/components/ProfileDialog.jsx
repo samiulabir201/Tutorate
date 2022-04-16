@@ -70,7 +70,7 @@ export const ProfileDialog = (props) => {
         event.preventDefault();
         setUserError('');
         setPasswordError('');
-        if (user === "") {
+        if (username === "") {
             setUserError("Please enter a username.");
             return;
         }

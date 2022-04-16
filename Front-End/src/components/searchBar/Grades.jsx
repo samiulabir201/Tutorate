@@ -3,6 +3,12 @@ import {Autocomplete, TextField} from "@mui/material";
 
 export const Grades = (props) => {
     const [grades, setGrades] = useState([]);
+    const [selection, setSelection] = useState(props.grades);
+
+    const updateSelection = (newSelection) => {
+        setSelection(newSelection);
+        props.onGradeChange(newSelection);
+    }
 
     useEffect(async () => {
         const res = await fetch(`http://localhost:8080/tutor/getAllGrades`, {
@@ -16,10 +22,10 @@ export const Grades = (props) => {
     return <Autocomplete
         multiple
         freeSolo={props.allowNewValues}
-        renderInput={(params) => <TextField {...params} label="Grades" required/>}
+        renderInput={(params) => <TextField {...params} label="Grades" required={props.required && selection.length === 0}/>}
         options={grades}
-        defaultValue={props.grades}
-        onChange={(event, values) => props.onGradeChange(values)}
+        defaultValue={selection}
+        onChange={(event, values) => updateSelection(values)}
         fullWidth
         />
 };

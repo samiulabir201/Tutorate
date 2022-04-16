@@ -3,6 +3,7 @@ import {Link, useLocation} from 'react-router-dom';
 
 import { useStateContext } from '../contexts/StateContextProvider';
 import { Loading } from './Loading';
+import {Chip, Rating} from "@mui/material";
 
 export const Results = () => {
   const { searchTerm, searchParams} = useStateContext();
@@ -43,11 +44,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -62,11 +66,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -81,11 +88,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -100,11 +110,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -119,11 +132,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -138,11 +154,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -157,11 +176,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -176,11 +198,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
@@ -195,11 +220,14 @@ export const Results = () => {
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
-                      <p className="mb-3 fw-bold fs-4">{result.name}</p>
+                      <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <p className="mb-2">{result.rating}</p>
-                    <p className="mb-2">{result.location}</p>
-                    <p className="mb-2">{result.subjects}</p>
+                    <Rating value={result.rating} readOnly/>
+                    <br/>
+                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    {result.subjects?.map((subject) => {
+                      return <Chip className="m-1" label={subject}/>
+                    })}
                   </div>
                 </div>
               </div>
