@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Subjects} from "./searchBar/Subjects";
 import {Grades} from "./searchBar/Grades";
 import {Location} from "./Location";
@@ -7,6 +7,7 @@ import "../stylesheets/TutorProfileForm.css";
 import {useStateContext} from "../contexts/StateContextProvider";
 import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField';
+import {useHistory} from "react-router-dom";
 
 export const TutorProfileForm = (props) => {
     const {user, setUser} = useStateContext();
@@ -16,6 +17,7 @@ export const TutorProfileForm = (props) => {
     const [subjects, setSubjects] = useState([]);
     const [grades, setGrades] = useState([]);
     const [wage, setWage] = useState(0);
+    const history = useHistory();
 
     const createProfile = async (event) => {
         event.preventDefault();
@@ -29,6 +31,11 @@ export const TutorProfileForm = (props) => {
         });
         setUser(await res.json());
     }
+
+    useEffect(() => {
+        if (user.tutor != null) history.push("/" + user.tutor.id);
+    }, [user]);
+
     return (
         <ReactModal
             isOpen={props.show}

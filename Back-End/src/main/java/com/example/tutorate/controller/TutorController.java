@@ -33,7 +33,8 @@ public class TutorController {
         String username = (String) request.getSession().getAttribute("User");
         User user = userRepository.findByUsername(username);
         user.setRole(Role.tutor);
-        tutorService.saveTutor(tutor);
+        Tutor createdTutor = tutorService.saveTutor(tutor);
+        user.setTutor(createdTutor);
         return user;
     }
   

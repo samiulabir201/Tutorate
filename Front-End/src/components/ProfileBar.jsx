@@ -5,11 +5,13 @@ import { Dropdown } from 'react-bootstrap';
 import { ProfileDialog } from './ProfileDialog';
 import {TutorProfileForm} from "./TutorProfileForm";
 import {useStateContext} from "../contexts/StateContextProvider";
+import { useHistory } from "react-router-dom";
 
 export const ProfileBar = () => {
     const [profileDialogShow, setProfileDialogShow] = useState(false);
     const {user, setUser} = useStateContext();
     const [formShown, setFormShown] = useState(false);
+    const history = useHistory();
 
     const logout = async () => {
         await fetch(`http://localhost:8080/user/logout`, {
@@ -61,7 +63,7 @@ export const ProfileBar = () => {
                     <Dropdown.Item
                         hidden={user.role === 'user'}
                         className="dropdown-item"
-                        onClick={() => {}}>
+                        onClick={() => {history.push("/" + user.tutor.id);}}>
                         <i className="icon bi bi-person-circle" />
                         View Tutor Profile
                     </Dropdown.Item>
