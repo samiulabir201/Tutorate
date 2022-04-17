@@ -18,7 +18,7 @@ export const TutorProfile = () => {
 
     useEffect(async () => {
         await getTutor();
-    })
+    }, [])
 
     return (
         <div className="mt-10 container">
