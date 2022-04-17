@@ -8,6 +8,7 @@ import {useStateContext} from "../contexts/StateContextProvider";
 import Grid from "@mui/material/Grid";
 import TextField from '@mui/material/TextField';
 import {useHistory} from "react-router-dom";
+import {ImageUpload} from "./ImageUpload";
 
 export const TutorProfileForm = (props) => {
     const {user, setUser} = useStateContext();
@@ -17,6 +18,7 @@ export const TutorProfileForm = (props) => {
     const [subjects, setSubjects] = useState([]);
     const [grades, setGrades] = useState([]);
     const [wage, setWage] = useState(0);
+    const [image, setImage] = useState(null);
     const history = useHistory();
 
     const createProfile = async (event) => {
@@ -45,16 +47,23 @@ export const TutorProfileForm = (props) => {
         >
             <h3 className="fs-2 heading text-center">Create a Tutor Profile</h3>
             <form onSubmit={createProfile} className="optionsContainer">
-                <Grid container spacing={4}>
-                    <Grid item xs={6} className="d-inline-flex">
-                        <TextField fullWidth required name="name" label="Name"
-                            onChange={(event) => setName(event.target.value)}
-                        />
+                <Grid container spacing={4} alignItems="center">
+                    <Grid item xs={6}>
+                        <ImageUpload image setImage={setImage}/>
                     </Grid>
-                    <Grid item xs={6} className="d-inline-flex">
-                        <TextField fullWidth required name="phone" label="Phone" type="number"
-                            onChange={(event) => setPhone(event.target.value)}
-                        />
+                    <Grid item xs={6}>
+                        <Grid container spacing={4}>
+                            <Grid item xs={12}>
+                                <TextField fullWidth required name="name" label="Name"
+                                           onChange={(event) => setName(event.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField fullWidth required name="phone" label="Phone" type="number"
+                                           onChange={(event) => setPhone(event.target.value)}
+                                />
+                            </Grid>
+                        </Grid>
                     </Grid>
                     <Grid item xs={6} className="d-inline-flex">
                         <Location allowNewValues={true} onLocationChange={setLocation} />
