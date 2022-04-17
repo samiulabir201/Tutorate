@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {RateForm} from "./RateForm";
 
 export const TutorProfile = () => {
     let { id } = useParams();
     const [tutor, setTutor] = useState({});
     const [image, setImage] = useState('/profile.png')
+    const [formShown, setFormShown] = useState(false);
 
     const getTutor = async () => {
         const res = await fetch(`http://localhost:8080/tutor/${id}`, {
@@ -32,6 +34,10 @@ export const TutorProfile = () => {
                     <p className="mb-2">Grades: {tutor.grades}</p>
                     <p className="mb-2">Subjects: {tutor.subjects}</p>
                     <p>Fees: BDT {tutor.min_wage}</p>
+                    <button className="button" type="submit" 
+                    onClick={() => {setFormShown(true)}}
+                    >Rate</button>
+                    <RateForm show={formShown} onHide={() => setFormShown(false)} tutor_id={id}/>
                 </div>
             </div>
         </div>
