@@ -19,7 +19,7 @@ public class TutorRating implements Serializable {
     @JoinColumn(name = "fk_tutor")
     Tutor tutor;
 
-    int rate;
+    float rate;
     int punctuality;
     int effectiveness;
     int clarity;
@@ -38,7 +38,7 @@ public class TutorRating implements Serializable {
 
 
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 
@@ -58,12 +58,12 @@ public class TutorRating implements Serializable {
         return tutor;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
     public void calculateRate(){
-        this.rate = ((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
+        this.rate = (float)((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
     }
 
 }
