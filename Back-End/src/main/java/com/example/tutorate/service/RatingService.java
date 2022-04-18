@@ -1,14 +1,12 @@
 package com.example.tutorate.service;
-import com.example.tutorate.model.Tutor;
-import com.example.tutorate.model.TutorRatingKey;
-import com.example.tutorate.model.User;
-import org.springframework.stereotype.Service;
 
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 public interface RatingService {
 
      boolean findRated(int studentId,int TutorId);
-//     User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey);
-//    Tutor addRatingRecordTutor(Tutor tutor,TutorRatingKey tutorRatingKey);
-
+     void storeRating(int tutorId, ArrayList<Integer> ratingList, HttpServletRequest request);
+     float calculateAverageRating(int id);
 }
