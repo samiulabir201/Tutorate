@@ -18,7 +18,7 @@ export const Subjects = (props) => {
       headers: { 'Content-Type': 'application/json' },
     });
     setSubjects(await res.json());
-  })
+  }, [])
 
   return <Autocomplete
       multiple

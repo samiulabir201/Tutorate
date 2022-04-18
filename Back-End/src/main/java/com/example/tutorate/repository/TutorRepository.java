@@ -20,6 +20,4 @@ public interface TutorRepository extends JpaRepository<Tutor, Integer> {
     @Query(value = "SELECT grades FROM tutor_grades", nativeQuery = true)
     List<String> getAllGrades();
 
-    @Query(value = "SELECT AVG (rate) from tutor_rating_key where fk_tutor= :id",nativeQuery = true)
-        float   getAverageRating(int id);
 }

@@ -15,8 +15,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="tutor_id")
     private Tutor tutor;
-//    @OneToMany(mappedBy = "user")
-//    Set<TutorRatingKey> tutorRatingKeySet;
+
 
     public User() {
         role = Role.user;

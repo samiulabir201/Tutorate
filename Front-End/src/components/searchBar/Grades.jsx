@@ -17,7 +17,7 @@ export const Grades = (props) => {
             headers: { 'Content-Type': 'application/json' },
         });
         setGrades(await res.json());
-    })
+    }, [])
 
     return <Autocomplete
         multiple

@@ -5,43 +5,38 @@ package com.example.tutorate.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class TutorRatingKey  {
+@IdClass(TutorRatingPK.class)
+public class TutorRating implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
     @ManyToOne
     @JoinColumn(name = "fk_user")
     User user;
+
+    @Id
     @ManyToOne
     @JoinColumn(name = "fk_tutor")
     Tutor tutor;
+
     int rate;
     int punctuality;
     int effectiveness;
-    int clear_understanding;
+    int clarity;
     int patience;
 
-    public TutorRatingKey(){
+    public TutorRating(){}
 
+    public TutorRating(User user, Tutor tutor, ArrayList<Integer> ratingList){
+        this.user = user;
+        this.tutor = tutor;
+        this.punctuality = ratingList.get(0);
+        this.effectiveness = ratingList.get(1);
+        this.clarity = ratingList.get(2);
+        this.patience = ratingList.get(3);
     }
 
-    public TutorRatingKey(User user, Tutor tutor, ArrayList<Integer> list){
-        this.user=user;
-        this.tutor=tutor;
-        this.punctuality= list.get(0);
-        this.effectiveness=list.get(1);
-        this.clear_understanding=list.get(2);
-        this.patience=list.get(3);
-    }
 
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setRate(int rate) {
         this.rate = rate;
@@ -67,13 +62,8 @@ public class TutorRatingKey  {
         return rate;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int calculateRate(){
-        rate=1*this.punctuality+2*this.patience+3*this.clear_understanding+4*this.effectiveness;
-        return rate;
+    public void calculateRate(){
+        this.rate = ((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
     }
 
 }

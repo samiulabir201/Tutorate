@@ -11,7 +11,7 @@ export const Location = (props) => {
             headers: { 'Content-Type': 'application/json' },
         });
         setLocations(await res.json());
-    })
+    }, [])
     return <Autocomplete
         freeSolo={props.allowNewValues}
         renderInput={(params) => <TextField {...params} label="Location" required/>}

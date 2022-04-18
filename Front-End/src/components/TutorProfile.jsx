@@ -26,7 +26,7 @@ export const TutorProfile = () => {
 
     useEffect(async () => {
         await getTutor();
-    })
+    }, [])
 
     const getButton = () => {
         if (user.username === undefined) {
