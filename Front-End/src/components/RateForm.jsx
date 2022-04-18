@@ -1,32 +1,22 @@
 import ReactModal from "react-modal";
-import React, {useEffect, useState} from "react";
-import {useStateContext} from "../contexts/StateContextProvider";
-import {useHistory} from "react-router-dom";
-
-
-import {Subjects} from "./searchBar/Subjects";
-import {Grades} from "./searchBar/Grades";
-import {Location} from "./Location";
-import "../stylesheets/TutorProfileForm.css";
-
+import React, {useState} from "react";
+import "../stylesheets/RateForm.css";
 import Grid from "@mui/material/Grid";
-import TextField from '@mui/material/TextField';
+import {Ranking} from "./searchBar/Ranking";
+import {TextField} from "@mui/material";
 
 
 export const RateForm = (props) => {
-    const {user, setUser} = useStateContext();
-
-    const [patience,setPatience]=useState(1);
-    const[punctuality,setPunctuality]=useState(1);
-    const[effectiveness,setEffectiveness]=useState(1);
-    const[clear_understanding,setClearUnderstanding]=useState(1);
-    const history = useHistory();
+    const [patience, setPatience] = useState(0);
+    const [punctuality, setPunctuality] = useState(0);
+    const [effectiveness, setEffectiveness] = useState(0);
+    const [clarity, setClarity] = useState(0);
 
     const rateTutor = async (event) => {
         event.preventDefault();
 
         props.onHide();
-        const res = await fetch(`http://localhost:8080/tutor/rate?tutor_id=${props.tutor_id}&list=${punctuality},${effectiveness},${clear_understanding},
+        const res = await fetch(`http://localhost:8080/tutor/rate?tutor_id=${props.tutor_id}&list=${punctuality},${effectiveness},${clarity},
         ${patience}`, {
             method: 'GET',
             credentials: 'include',
@@ -39,43 +29,44 @@ export const RateForm = (props) => {
         <ReactModal
             isOpen={props.show}
             onRequestClose={() => props.onHide()}
-            className="TutorProfileForm"
-            overlayClassName="TutorProfileFormOverlay"
+            className="RateForm"
+            overlayClassName="RateFormOverlay"
         >
-            <h3 className="fs-2 heading text-center">Rate</h3>
+            <h3 className="fs-4 heading">Review</h3>
             <form onSubmit={rateTutor} className="optionsContainer">
-            <label for="punctuality">Punctuality:</label>
-             <select id="punctuality" value={punctuality} onChange={e=>setPunctuality(e.currentTarget.value)}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-    </select>
-    <label for="effectiveness">Effectiveness:</label>
-             <select id="effectiveness" value={effectiveness} onChange={e=>setEffectiveness(e.currentTarget.value)}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-    </select>
-
-    <label for="clear_understanding" >clear understanding:</label>
-             <select id="clear_understanding" value={clear_understanding} onChange={e=>setClearUnderstanding(e.currentTarget.value)} >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-    </select>
-    <label for="patience">Patience:</label>
-             <select id="patience" value={patience} onChange={e=>setPatience(e.currentTarget.value)}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-    </select>
-    <div>{props.tutor_id}</div>
-    <button className="button" type="submit">Submit</button>
-    
+                <Grid container spacing={4}>
+                    <Grid item xs={2} className="d-inline-flex">
+                        <p>Punctuality:</p>
+                    </Grid>
+                    <Grid item xs={4} className="d-inline-flex">
+                        <Ranking rank={punctuality} onRankChange={(newValue) => setPunctuality(newValue)} />
+                    </Grid>
+                    <Grid item xs={2} className="d-inline-flex">
+                        <p>Effectiveness:</p>
+                    </Grid>
+                    <Grid item xs={4} className="d-inline-flex">
+                        <Ranking rank={effectiveness} onRankChange={(newValue) => setEffectiveness(newValue)} />
+                    </Grid>
+                    <Grid item xs={2} className="d-inline-flex">
+                        <p>Clarity:</p>
+                    </Grid>
+                    <Grid item xs={4} className="d-inline-flex">
+                        <Ranking rank={clarity} onRankChange={(newValue) => setClarity(newValue)} />
+                    </Grid>
+                    <Grid item xs={2} className="d-inline-flex">
+                        <p>Patience:</p>
+                    </Grid>
+                    <Grid item xs={4} className="d-inline-flex">
+                        <Ranking rank={patience} onRankChange={(newValue) => setPatience(newValue)} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <p className="mb-2">Review:</p>
+                        <TextField className="mb-4" variant="outlined" multiline rows={4} fullWidth/>
+                    </Grid>
+                </Grid>
+                <div className="d-inline-flex mx-auto my-0">
+                    <button className="button" type="submit">Submit</button>
+                </div>
             </form>
         </ReactModal>
     );
