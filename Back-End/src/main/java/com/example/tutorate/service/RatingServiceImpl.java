@@ -2,48 +2,56 @@ package com.example.tutorate.service;
 
 
 import com.example.tutorate.model.Tutor;
-import com.example.tutorate.model.TutorRatingKey;
+import com.example.tutorate.model.TutorRating;
 import com.example.tutorate.model.User;
 import com.example.tutorate.repository.RatingRepository;
+import com.example.tutorate.repository.TutorRepository;
+import com.example.tutorate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Service
 public class RatingServiceImpl implements RatingService{
 
 @Autowired
     RatingRepository ratingRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private TutorRepository tutorRepository;
+
     @Override
     public boolean findRated(int userId, int TutorId) {
 
-        for(TutorRatingKey ratingKey:ratingRepository.findAll()){
-            User user=ratingKey.getUser();
-            Tutor tutor=ratingKey.getTutor();
-            if(user.getId()==userId && tutor.getId()==TutorId)
+        for(TutorRating ratingKey:ratingRepository.findAll()){
+            User user = ratingKey.getUser();
+            Tutor tutor = ratingKey.getTutor();
+            if(user.getId() == userId && tutor.getId() == TutorId)
                 return true;
         }
         return false;
     }
-////
-////    @Override
-////    public User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey) {
-//////        Set<TutorRatingKey> tutorRatingKeySetStudent=user.getTutorRatingKeySet();
-////        tutorRatingKeySetStudent.add(tutorRatingKey);
-////        user.setTutorRatingKeySet(tutorRatingKeySetStudent);
-//
-//
-//
-//        return user;
-//    }
 
-//    @Override
-//    public Tutor addRatingRecordTutor(Tutor tutor, TutorRatingKey tutorRatingKey) {
-//        Set<TutorRatingKey> tutorRatingKeySetTutor=tutor.getTutorRatingKeys();
-//        tutorRatingKeySetTutor.add(tutorRatingKey);
-//        tutor.setTutorRatingKeys(tutorRatingKeySetTutor);
-//
-//        return tutor;
-//    }
+    public void storeRating(int tutorId, ArrayList<Integer> ratingList, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = userRepository.findByUsername((String) session.getAttribute("User"));
+
+        if(session.getAttribute("User") != null){
+            Tutor tutor = tutorRepository.findById(tutorId);
+            TutorRating tutorRating = new TutorRating(user, tutor, ratingList);
+            tutorRating.calculateRate();
+            ratingRepository.save(tutorRating);
+
+            tutor.setAverageRating(calculateAverageRating(tutorId));
+            tutorRepository.save(tutor);
+        }
+    }
+
+    public float calculateAverageRating(int id) {
+        return   ratingRepository.getAverageRating(id);
+    }
 }
