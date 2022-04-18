@@ -51,7 +51,7 @@ public class SearchParams {
             return false;
         if (grades != null && grades.length > 0 && Collections.disjoint(List.of(grades), tutor.getGrades()))
             return false;
-        if (rank > tutor.getAverage_rating())   return false;
+        if (rank > tutor.getAverageRating())   return false;
         return true;
     }
 }
