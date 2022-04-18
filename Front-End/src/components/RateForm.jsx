@@ -16,7 +16,7 @@ export const RateForm = (props) => {
         event.preventDefault();
 
         props.onHide();
-        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}&ratingList=${punctuality},${effectiveness},${clear_understanding},
+        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}&ratingList=${punctuality},${effectiveness},${clarity},
         ${patience}`, {
             method: 'GET',
             credentials: 'include',

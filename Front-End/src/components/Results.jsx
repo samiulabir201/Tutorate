@@ -21,6 +21,7 @@ export const Results = () => {
       body: JSON.stringify(searchParams),
     });
     const data = await res.json();
+    console.log(data);
     setResults(data);
     setLoading(false);
   };
@@ -46,7 +47,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -68,7 +69,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -90,7 +91,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -112,7 +113,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -134,7 +135,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -156,7 +157,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -178,7 +179,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -200,7 +201,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
@@ -222,7 +223,7 @@ export const Results = () => {
                     <Link to={"/" + result.id}>
                       <p className="mb-2 fw-bold fs-4">{result.name}</p>
                     </Link>
-                    <Rating value={result.rating} readOnly/>
+                    <Rating value={result.averageRating} readOnly/>
                     <br/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
