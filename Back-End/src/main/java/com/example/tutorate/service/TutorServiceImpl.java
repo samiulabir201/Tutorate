@@ -71,9 +71,4 @@ public class TutorServiceImpl implements TutorService{
             return true;
         else    return false;
     }
-
-    @Override
-    public float calculateAverageRating(int id) {
-      return   tutorRepository.getAverageRating(id);
-    }
 }
