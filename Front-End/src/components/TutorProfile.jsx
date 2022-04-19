@@ -30,6 +30,7 @@ export const TutorProfile = () => {
     }, [])
 
     const getButton = () => {
+        if (user.tutor !== undefined && user.tutor !== null && user.tutor.id == id)  return;
         if (user.username === undefined) {
             return (
                 <React.Fragment>
