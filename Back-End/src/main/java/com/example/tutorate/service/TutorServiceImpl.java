@@ -4,20 +4,21 @@ import com.example.tutorate.model.SearchParams;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class TutorServiceImpl implements TutorService{
     @Autowired
-    private TutorRepository tutorRepository;
+    private static TutorRepository tutorRepository;
 
     public TutorServiceImpl() {}
+
 
     @Override
     public Tutor saveTutor(Tutor tutor) {
@@ -73,7 +74,29 @@ public class TutorServiceImpl implements TutorService{
     }
 
     @Override
-    public float calculateAverageRating(int id) {
+    public float calculateAverageRating(Tutor id) {
       return   tutorRepository.getAverageRating(id);
     }
+
+    @Override
+    public Integer deleteById(int id) {
+        return null;
+    }
+
+    /*@Override
+    public Integer deleteById(int id) {
+        tutorRepository.getAllId();
+        return null;
+    }*/
+
+    /*@Override
+    public void deleteById(Tutor id) {
+        tutorRepository.deleteById(id);
+    }*/
+
+
+    /*@Override
+    public void deleteById(Tutor id){
+
+    }*/
 }

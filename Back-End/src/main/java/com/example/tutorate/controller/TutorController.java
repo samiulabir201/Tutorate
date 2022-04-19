@@ -6,11 +6,15 @@ import com.example.tutorate.repository.TutorRepository;
 import com.example.tutorate.repository.UserRepository;
 import com.example.tutorate.service.RatingService;
 import com.example.tutorate.service.TutorService;
+import com.example.tutorate.service.TutorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,17 +51,34 @@ public class TutorController {
 
     @PostMapping("/update")
     public Tutor updatetutor(@RequestBody Tutor tutor , HttpServletRequest request) {
-        String name = (String) request.getSession().getAttribute("User");
-        System.out.println(name);
-        Tutor updateTutor = tutorRepository.findByName(name);
+        HttpSession session=request.getSession();
+
+        User user=userRepository.findByUsername((String) session.getAttribute("User"));
+        /*int id = (int) request.getSession().getAttribute("Session id");*/
+        //System.out.println(user.getTutor().getId());
+        /*System.out.println(id);*/
+        Tutor updateTutor = tutorRepository.findByName(user.getTutor().getName());
         updateTutor.setName(tutor.getName());
         updateTutor.setLocation(tutor.getLocation());
         updateTutor.setPhone(tutor.getPhone());
         //tutorService.saveTutor(tutor);
         tutorRepository.save(updateTutor);
-        return updateTutor;
+        return null;
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteTutor(@RequestBody Tutor tutor , HttpServletRequest request){
+        HttpSession session=request.getSession();
+
+        User user=userRepository.findByUsername((String) session.getAttribute("User"));
+        Tutor deleteTutor = tutorRepository.findByName(user.getTutor().getName());
+        int id = deleteTutor.getId();
+
+        System.out.println(id);
+        tutorService.deleteById(id);
+        return null;
+        //TutorServiceImpl.deleteById(deleteTutor.getId());
+    }
     /*Get homepage showing all the tutors available, from this information we choose which
     info to show in front end(clickable links)
     * */
@@ -87,7 +108,7 @@ public class TutorController {
     }
 
     @GetMapping("/{id}")
-        public Tutor getTutorDetail(@PathVariable int id){
+        public Tutor getTutorDetail(@PathVariable Tutor id){
 
         return tutorRepository.findById(id);
     }
@@ -108,7 +129,7 @@ public class TutorController {
     }
 
     @GetMapping("/rate")
-    public float rate( @RequestParam int tutor_id, @RequestParam ArrayList<Integer>list,HttpServletRequest request) {
+    public float rate(@RequestParam Tutor tutor_id, @RequestParam ArrayList<Integer>list, HttpServletRequest request) {
         HttpSession session=request.getSession();
         
         User user=userRepository.findByUsername((String) session.getAttribute("User"));

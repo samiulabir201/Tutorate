@@ -12,6 +12,8 @@ public interface TutorService {
     Tutor getTutorByName(String name);
 
     boolean sessionCheck(HttpServletRequest request);
-   float calculateAverageRating(int id);
+   float calculateAverageRating(Tutor id);
 
+
+    public Integer deleteById(int id);
 }

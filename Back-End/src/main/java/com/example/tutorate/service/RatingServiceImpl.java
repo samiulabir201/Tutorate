@@ -8,12 +8,10 @@ import com.example.tutorate.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
 public class RatingServiceImpl implements RatingService{
 
-@Autowired
+    @Autowired
     RatingRepository ratingRepository;
     @Override
     public boolean findRated(int userId, int TutorId) {
@@ -24,6 +22,11 @@ public class RatingServiceImpl implements RatingService{
             if(user.getId()==userId && tutor.getId()==TutorId)
                 return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean findRated(int studentId, Tutor TutorId) {
         return false;
     }
 ////

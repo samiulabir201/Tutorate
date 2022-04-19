@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
         return userRepository.findByUsername(user.getUsername());
     }
+    
+    /*public void deleteByName(String name){
+        User getUserByName;
+        name = getUserByName.getUsername();
+        userRepository.deleteByName(name);
+    }*/
 
     /*public User deleteUser(User user){
         Iterator<User> iterator = user.iterator();

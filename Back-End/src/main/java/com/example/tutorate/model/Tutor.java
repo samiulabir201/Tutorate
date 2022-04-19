@@ -91,6 +91,8 @@ public class Tutor {
         this.min_wage = min_wage;
     }
 
+    public void deleteByName(String name){this.name=null;}
+
 //    public User getUser() {
 //        return user;
 //    }

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 public interface RatingService {
 
-     boolean findRated(int studentId,int TutorId);
+    boolean findRated(int userId, int TutorId);
+
+    boolean findRated(int studentId, Tutor TutorId);
 //     User addRatingRecordStudent(User user, TutorRatingKey tutorRatingKey);
 //    Tutor addRatingRecordTutor(Tutor tutor,TutorRatingKey tutorRatingKey);
 

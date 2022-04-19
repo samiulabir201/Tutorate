@@ -3,7 +3,9 @@ package com.example.tutorate.controller;
 import com.example.tutorate.model.Role;
 import com.example.tutorate.model.Tutor;
 import com.example.tutorate.repository.UserRepository;
+import com.example.tutorate.service.TutorServiceImpl;
 import com.example.tutorate.service.UserService;
+import com.example.tutorate.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,11 +85,23 @@ public class LoginController {
         return update;
     }
 
+    /*@DeleteMapping("/delete")
+    public Tutor deleteTutor(@RequestBody User user , HttpServletRequest request){
+        String name = (String) request.getSession().getAttribute("User");
+
+        Tutor deleteTutor = tutorRepository.findByName(name);
+        System.out.println(deleteTutor);
+        deleteTutor.deleteByName(String.valueOf(deleteTutor));
+        return null;
+        TutorServiceImpl.deleteByName(name);
+        return ResponseEntity.ok().build();
+    }*/
+
     /*@PostMapping("/delete")
     public User delete(@RequestBody User user, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
         User delete = userRepository.findByUsername(username);
-        user.deleteUser(delete);
+        UserServiceImpl.deleteByName(delete);
         return user;
     }*/
 
