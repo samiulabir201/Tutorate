@@ -1,5 +1,7 @@
 package com.example.tutorate.model;
 
+import org.hibernate.mapping.Map;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Tutor {
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
+
 
   
     public Tutor() {}
