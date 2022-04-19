@@ -65,7 +65,7 @@ export const TutorProfile = () => {
                         <img src={tutor.image === null ? "./profile.png" : "http://localhost:8080" + tutor.image}
                              className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
                         <h4 className="mb-3 fw-bold fs-4 text-center">{tutor.name}</h4>
-                        <Rating value={tutor.average_rating} readOnly/>
+                        <Rating value={tutor.average_rating} readOnly precision={0.2}/>
                         <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>
                         <p className="mb-2"><i className="bi bi-telephone"/>&nbsp;{tutor.phone}</p>
                         {tutor.grades?.map((grade) => {
