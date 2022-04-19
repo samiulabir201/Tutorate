@@ -33,7 +33,7 @@ export const TutorProfile = () => {
 
     useEffect(async () => {
         await getTutor();
-    }, [])
+    }, [id])
 
     const getButton = () => {
         if (user.tutor !== undefined && user.tutor !== null && user.tutor.id == id)  return;
@@ -64,7 +64,7 @@ export const TutorProfile = () => {
     }
 
     return (
-        <div className="mt-10 container TutorProfile">
+        <div key={id} className="mt-10 container TutorProfile">
             <div className="row">
                 <div className="card ml-10 col-xl-3 bg-transparent border-0">
                     <div className="card-body bg-white">
