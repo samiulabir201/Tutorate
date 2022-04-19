@@ -14,14 +14,15 @@ export const RateForm = (props) => {
     const [review, setReview] = useState("");
 
     const rateTutor = async (event) => {
+        const rateParams = {effectiveness, clarity, patience, punctuality, review};
         event.preventDefault();
 
         props.onHide();
-        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}&ratingList=${punctuality},${effectiveness},${clarity},
-        ${patience}&review=${review}`, {
-            method: 'GET',
+        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}`, {
+            method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(rateParams),
         });
 
     }

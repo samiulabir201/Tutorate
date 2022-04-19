@@ -103,10 +103,10 @@ public class TutorController {
         return tutorRepository.getAllGrades().stream().distinct().collect(Collectors.toList());
     }
 
-    @GetMapping("/rate")
-    public float rate(@RequestParam int tutorId, @RequestParam ArrayList<Integer> ratingList, @RequestParam String review, HttpServletRequest request) {
+    @PostMapping("/rate")
+    public float rate(@RequestParam int tutorId, @RequestBody TutorRating rateParams, HttpServletRequest request) {
 
-        ratingService.storeRating(tutorId, ratingList, review, request);
+        ratingService.storeRating(tutorId, rateParams, request);
         Tutor tutor = tutorRepository.findById(tutorId);
         return tutor.getAverageRating();
     }
