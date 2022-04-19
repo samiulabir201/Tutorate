@@ -18,8 +18,16 @@ public class Tutor {
     @ElementCollection
     private List<String> subjects = new ArrayList<>();
     private int min_wage;
+    private String image;
 
-  
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Tutor() {}
 
     public int getId() {

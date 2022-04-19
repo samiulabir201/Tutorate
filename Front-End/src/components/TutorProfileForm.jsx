@@ -24,12 +24,16 @@ export const TutorProfileForm = (props) => {
     const createProfile = async (event) => {
         event.preventDefault();
 
+        const jsonData = JSON.stringify({name, location, phone, grades, subjects, "min_wage": wage});
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("tutor", new Blob([jsonData], {type: 'application/json'}));
+
         props.onHide();
         const res = await fetch(`http://localhost:8080/tutor/add`, {
             method: 'POST',
             credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({name, location, phone, grades, subjects, "min_wage": wage}),
+            body: formData,
         });
         setUser(await res.json());
     }

@@ -8,8 +8,10 @@ import com.example.tutorate.service.RatingService;
 import com.example.tutorate.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +31,20 @@ public class TutorController {
     @Autowired
     private RatingRepository ratingRepository;
 
-    @PostMapping("/add")
-    public User add(@RequestBody Tutor tutor, HttpServletRequest request) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public User add(@RequestPart("tutor") Tutor tutor, @RequestPart("image") MultipartFile image, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
         User user = userRepository.findByUsername(username);
         user.setRole(Role.tutor);
+
+        String filepath = "/tutorImages/" + user.getId();
+        String imageName = image.getOriginalFilename();
+        filepath += imageName.substring(imageName.lastIndexOf("."));
+        try { image.transferTo(new File(System.getProperty("user.dir") + filepath)); }
+        catch (Exception e) { e.printStackTrace(); }
+
+        tutor.setImage(filepath);
         user.setTutor(tutor);
-        //tutorService.saveTutor(tutor);
         userRepository.save(user);
         return user;
     }
