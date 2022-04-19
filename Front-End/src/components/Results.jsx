@@ -27,7 +27,7 @@ export const Results = () => {
   };
 
   useEffect(() => {
-    if (searchTerm !== '')  getResults();
+    getResults();
   }, [searchTerm, searchParams, location.pathname]);
 
   if (loading) return <Loading />;

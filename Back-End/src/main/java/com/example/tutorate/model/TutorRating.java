@@ -59,17 +59,6 @@ public class TutorRating implements Serializable {
     public void setPatience(int patience) {
         this.patience = patience;
     }
-//    public TutorRating(User user, Tutor tutor, ArrayList<Integer> ratingList, String review){
-//        this.user = user;
-//        this.tutor = tutor;
-//        this.punctuality = ratingList.get(0);
-//        this.effectiveness = ratingList.get(1);
-//        this.clarity = ratingList.get(2);
-//        this.patience = ratingList.get(3);
-//        this.review = review;
-//    }
-
-
 
     public void setRate(float rate) {
         this.rate = rate;
