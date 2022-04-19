@@ -24,16 +24,18 @@ public class TutorRating implements Serializable {
     int effectiveness;
     int clarity;
     int patience;
+    String review;
 
     public TutorRating(){}
 
-    public TutorRating(User user, Tutor tutor, ArrayList<Integer> ratingList){
+    public TutorRating(User user, Tutor tutor, ArrayList<Integer> ratingList, String review){
         this.user = user;
         this.tutor = tutor;
         this.punctuality = ratingList.get(0);
         this.effectiveness = ratingList.get(1);
         this.clarity = ratingList.get(2);
         this.patience = ratingList.get(3);
+        this.review = review;
     }
 
 
@@ -64,6 +66,14 @@ public class TutorRating implements Serializable {
 
     public void calculateRate(){
         this.rate = (float)((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public String getReview() {
+        return review;
     }
 
 }

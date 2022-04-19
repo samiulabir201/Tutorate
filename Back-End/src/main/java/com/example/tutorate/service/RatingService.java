@@ -7,6 +7,6 @@ import java.util.ArrayList;
 public interface RatingService {
 
      boolean findRated(int studentId,int TutorId);
-     void storeRating(int tutorId, ArrayList<Integer> ratingList, HttpServletRequest request);
+     void storeRating(int tutorId, ArrayList<Integer> ratingList, String review, HttpServletRequest request);
      float calculateAverageRating(int id);
 }

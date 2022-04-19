@@ -95,9 +95,9 @@ public class TutorController {
     }
 
     @GetMapping("/rate")
-    public float rate(@RequestParam int tutorId, @RequestParam ArrayList<Integer> ratingList, HttpServletRequest request) {
+    public float rate(@RequestParam int tutorId, @RequestParam ArrayList<Integer> ratingList, @RequestParam String review, HttpServletRequest request) {
 
-        ratingService.storeRating(tutorId, ratingList, request);
+        ratingService.storeRating(tutorId, ratingList, review, request);
         Tutor tutor = tutorRepository.findById(tutorId);
         return tutor.getAverageRating();
     }

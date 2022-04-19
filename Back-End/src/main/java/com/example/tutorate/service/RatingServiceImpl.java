@@ -36,13 +36,13 @@ public class RatingServiceImpl implements RatingService{
         return false;
     }
 
-    public void storeRating(int tutorId, ArrayList<Integer> ratingList, HttpServletRequest request) {
+    public void storeRating(int tutorId, ArrayList<Integer> ratingList, String review, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = userRepository.findByUsername((String) session.getAttribute("User"));
 
         if(session.getAttribute("User") != null){
             Tutor tutor = tutorRepository.findById(tutorId);
-            TutorRating tutorRating = new TutorRating(user, tutor, ratingList);
+            TutorRating tutorRating = new TutorRating(user, tutor, ratingList, review);
             tutorRating.calculateRate();
             ratingRepository.save(tutorRating);
 
