@@ -6,6 +6,7 @@ import "../stylesheets/TutorProfile.css";
 import {useStateContext} from "../contexts/StateContextProvider";
 import {ProfileDialog} from "./ProfileDialog";
 import {Chip, Rating} from "@mui/material";
+import {Reviews} from "./TutorReviews";
 
 export const TutorProfile = () => {
     let { id } = useParams();
@@ -57,23 +58,26 @@ export const TutorProfile = () => {
 
     return (
         <div className="mt-10 container TutorProfile">
-            <div className="card ml-10 col-xl-3 bg-transparent border-0">
-                <div className="card-body bg-white">
-                    <img src={tutor.image === null ? "./profile.png" : "http://localhost:8080" + tutor.image}
-                         className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
-                    <h4 className="mb-3 fw-bold fs-4 text-center">{tutor.name}</h4>
-                    <Rating value={tutor.average_rating} readOnly/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>
-                    <p className="mb-2"><i className="bi bi-telephone"/>&nbsp;{tutor.phone}</p>
-                    {tutor.grades?.map((grade) => {
-                        return <Chip className="m-1" label={grade}/>
-                    })}
-                    {tutor.subjects?.map((subject) => {
-                        return <Chip className="m-1" label={subject}/>
-                    })}
-                    <p className="mb-2"><i className="bi bi-cash-stack"/>&nbsp;BDT {tutor.min_wage}</p>
+            <div className="row">
+                <div className="card ml-10 col-xl-3 bg-transparent border-0">
+                    <div className="card-body bg-white">
+                        <img src={tutor.image === null ? "./profile.png" : "http://localhost:8080" + tutor.image}
+                             className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
+                        <h4 className="mb-3 fw-bold fs-4 text-center">{tutor.name}</h4>
+                        <Rating value={tutor.average_rating} readOnly/>
+                        <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>
+                        <p className="mb-2"><i className="bi bi-telephone"/>&nbsp;{tutor.phone}</p>
+                        {tutor.grades?.map((grade) => {
+                            return <Chip className="m-1" label={grade}/>
+                        })}
+                        {tutor.subjects?.map((subject) => {
+                            return <Chip className="m-1" label={subject}/>
+                        })}
+                        <p className="mb-2"><i className="bi bi-cash-stack"/>&nbsp;BDT {tutor.min_wage}</p>
+                    </div>
+                    {getButton()};
                 </div>
-                {getButton()};
+                <Reviews />
             </div>
         </div>
     );

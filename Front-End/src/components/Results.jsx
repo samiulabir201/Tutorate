@@ -64,7 +64,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -86,7 +87,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -108,7 +110,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -130,7 +133,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -152,7 +156,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -174,7 +179,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -196,7 +202,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
@@ -218,7 +225,8 @@ export const Results = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-4 d-flex">
-                    <img src={"./profile.png"} className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
+                    <img src={result.image === null ? "./profile.png" : "http://localhost:8080" + result.image}
+                         className="m-auto img-fluid rounded-circle" width="128" height="128" alt=""/>
                   </div>
                   <div className="col-md-8">
                     <Link to={"/" + result.id}>
