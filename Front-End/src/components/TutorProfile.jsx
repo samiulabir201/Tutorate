@@ -59,7 +59,8 @@ export const TutorProfile = () => {
         <div className="mt-10 container TutorProfile">
             <div className="card ml-10 col-xl-3 bg-transparent border-0">
                 <div className="card-body bg-white">
-                    <img src={image} className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
+                    <img src={tutor.image === null ? "./profile.png" : "http://localhost:8080" + tutor.image}
+                         className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
                     <h4 className="mb-3 fw-bold fs-4 text-center">{tutor.name}</h4>
                     <Rating value={tutor.average_rating} readOnly/>
                     <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>

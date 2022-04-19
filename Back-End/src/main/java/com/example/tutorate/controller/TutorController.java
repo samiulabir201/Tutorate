@@ -40,7 +40,8 @@ public class TutorController {
         String filepath = "/tutorImages/" + user.getId();
         String imageName = image.getOriginalFilename();
         filepath += imageName.substring(imageName.lastIndexOf("."));
-        try { image.transferTo(new File(System.getProperty("user.dir") + filepath)); }
+        String staticFolder = getClass().getClassLoader().getResource("static").getFile();
+        try { image.transferTo(new File(staticFolder + filepath)); }
         catch (Exception e) { e.printStackTrace(); }
 
         tutor.setImage(filepath);
