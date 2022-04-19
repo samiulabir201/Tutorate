@@ -6,23 +6,20 @@ import { Loading } from './Loading';
 import {Chip, Rating} from "@mui/material";
 
 export const Results = () => {
-  const { searchTerm, searchParams} = useStateContext();
+  const { searchTerm, setSearchTerm, defaultParams, searchParams, setSearchParams} = useStateContext();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   const getResults = async () => {
     setLoading(true);
-
     const res = await fetch(`http://localhost:8080/tutor/getTutors?searchTerm=${searchTerm}`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(searchParams),
     });
-    const data = await res.json();
-    console.log(data);
-    setResults(data);
+    setResults(await res.json());
     setLoading(false);
   };
 
@@ -50,9 +47,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -73,9 +75,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -96,9 +103,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -119,9 +131,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -142,9 +159,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -165,9 +187,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -188,9 +215,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -211,9 +243,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
@@ -234,9 +271,14 @@ export const Results = () => {
                     </Link>
                     <Rating value={result.averageRating} readOnly precision={0.2}/>
                     <br/>
-                    <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
+                    <p className="mb-2" onClick={() => {
+                      setSearchTerm(result.location);
+                      setSearchParams({...defaultParams});
+                    }}><i className="bi bi-geo-alt"/>&nbsp;{result.location}</p>
                     {result.subjects?.map((subject) => {
-                      return <Chip className="m-1" label={subject}/>
+                      return <Chip className="m-1" label={subject} onClick={() => {
+                        setSearchParams({...defaultParams, subjects: [subject]})
+                      }}/>
                     })}
                   </div>
                 </div>
