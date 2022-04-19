@@ -111,4 +111,10 @@ public class TutorController {
         Tutor tutor = tutorRepository.findById(tutorId);
         return tutor.getAverageRating();
     }
+
+    @GetMapping("/review")
+    public List<TutorRating> reviews(@RequestParam int tutorId) {
+
+        return ratingService.getReviews(tutorId);
+    }
 }

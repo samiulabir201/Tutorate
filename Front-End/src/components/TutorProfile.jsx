@@ -78,7 +78,7 @@ export const TutorProfile = () => {
                     </div>
                     {getButton()};
                 </div>
-                <Reviews />
+                <Reviews id={id}/>
             </div>
         </div>
     );

@@ -5,12 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-    @Repository
+import java.util.List;
+
+@Repository
     public interface RatingRepository extends JpaRepository<TutorRating, Integer> {
         public TutorRating findById(int id);
 
-        @Query(value = "SELECT AVG (rate) from tutor_rating where fk_tutor= :id", nativeQuery = true)
+        @Query(value = "SELECT AVG (rating) from tutor_rating where fk_tutor= :id", nativeQuery = true)
         float  getAverageRating(int id);
+
+        @Query(value = "SELECT * from tutor_rating where fk_tutor = :id AND review != ''", nativeQuery = true)
+        List<TutorRating> getReviewsById(int id);
 
     }
 
