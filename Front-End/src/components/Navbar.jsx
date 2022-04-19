@@ -12,7 +12,7 @@ export const Navbar = () => {
         else    return <React.Fragment/>
     }
     return (
-        <div className="py-4 pl-4 pr-5 flex sm:justify-between border-b border-gray-200 ">
+        <div className="py-4 pl-4 pr-5 mx-2 flex sm:justify-between border-b border-gray-200 ">
             <Link className="my-auto" to="/">
                 <p className="text-2xl fs-4 font-bold text-gray-700 py-1 px-2 rounded">
                     TutoRate
