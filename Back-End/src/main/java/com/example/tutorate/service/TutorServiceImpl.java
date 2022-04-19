@@ -6,9 +6,11 @@ import com.example.tutorate.repository.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,22 @@ public class TutorServiceImpl implements TutorService{
     @Override
     public Tutor saveTutor(Tutor tutor) {
         return tutorRepository.save(tutor);
+    }
+
+    @Override
+    public String saveImage(MultipartFile image, int userID) {
+        if (image == null)  return null;
+        String filepath = "/tutorImages/" + userID;
+        String originalFileName = image.getOriginalFilename();
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        filepath += extension;
+        String staticFolder = getClass().getClassLoader().getResource("static").getFile();
+        try { image.transferTo(new File(staticFolder + filepath)); }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return filepath;
     }
 
     @Override

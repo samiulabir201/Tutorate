@@ -32,19 +32,14 @@ public class TutorController {
     private RatingRepository ratingRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public User add(@RequestPart("tutor") Tutor tutor, @RequestPart("image") MultipartFile image, HttpServletRequest request) {
+    public User add(@RequestPart("tutor") Tutor tutor, @RequestPart(value = "image", required = false) MultipartFile image, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
         User user = userRepository.findByUsername(username);
         user.setRole(Role.tutor);
 
-        String filepath = "/tutorImages/" + user.getId();
-        String imageName = image.getOriginalFilename();
-        filepath += imageName.substring(imageName.lastIndexOf("."));
-        String staticFolder = getClass().getClassLoader().getResource("static").getFile();
-        try { image.transferTo(new File(staticFolder + filepath)); }
-        catch (Exception e) { e.printStackTrace(); }
+        String imagePath = tutorService.saveImage(image, user.getId());
+        tutor.setImage(imagePath);
 
-        tutor.setImage(filepath);
         user.setTutor(tutor);
         userRepository.save(user);
         return user;
