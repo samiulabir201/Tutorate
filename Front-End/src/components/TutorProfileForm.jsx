@@ -35,12 +35,10 @@ export const TutorProfileForm = (props) => {
             credentials: 'include',
             body: formData,
         });
-        setUser(await res.json());
+        const modifiedUser = await(res.json());
+        setUser(modifiedUser);
+        if (modifiedUser.tutor != null) history.push("/" + modifiedUser.tutor.id);
     }
-
-    useEffect(() => {
-        if (user.tutor != null) history.push("/" + user.tutor.id);
-    }, [user]);
 
     return (
         <ReactModal
