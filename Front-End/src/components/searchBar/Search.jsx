@@ -21,6 +21,7 @@ export const Search = () => {
         value={text}
         type="text"
         className="sm:w-96 w-80 h-10 dark:bg-gray-200  border rounded-full shadow-sm outline-none p-6 text-black hover:shadow-lg"
+        style={{width: 450}}
         placeholder="🔎 Search by Name or Location"
         onChange={(e) => setText(e.target.value)}
       />
@@ -30,7 +31,7 @@ export const Search = () => {
         </button>
       )}
       <button type="button" onClick={() => {setAdvancedSearchShown(true)}}>
-        <i className="ml-5 fs-4 bi bi-funnel" />
+        <i className="ml-5 fs-4 bi bi-sliders2" />
       </button>
       <AdvancedSearch show={advancedSearchShown} onHide={() => setAdvancedSearchShown(false)}/>
     </div>
