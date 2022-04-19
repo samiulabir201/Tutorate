@@ -4,7 +4,6 @@ package com.example.tutorate.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Entity
 @IdClass(TutorRatingPK.class)
@@ -19,7 +18,7 @@ public class TutorRating implements Serializable {
     @JoinColumn(name = "fk_tutor")
     Tutor tutor;
 
-    float rate;
+    float rating;
     int punctuality;
     int effectiveness;
     int clarity;
@@ -60,8 +59,8 @@ public class TutorRating implements Serializable {
         this.patience = patience;
     }
 
-    public void setRate(float rate) {
-        this.rate = rate;
+    public void setRating(float rate) {
+        this.rating = rate;
     }
 
     public void setUser(User user) {
@@ -80,12 +79,12 @@ public class TutorRating implements Serializable {
         return tutor;
     }
 
-    public float getRate() {
-        return rate;
+    public float getRating() {
+        return rating;
     }
 
     public void calculateRate(){
-        this.rate = (float)((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
+        this.rating = (float)((1 * this.punctuality) + (2 * this.patience) + (3 * this.clarity) + (4 * this.effectiveness)) / 10;
     }
 
     public void setReview(String review) {

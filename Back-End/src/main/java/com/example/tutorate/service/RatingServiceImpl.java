@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RatingServiceImpl implements RatingService{
@@ -54,5 +55,10 @@ public class RatingServiceImpl implements RatingService{
 
     public float calculateAverageRating(int id) {
         return   ratingRepository.getAverageRating(id);
+    }
+
+    public List<TutorRating> getReviews(int tutorId) {
+
+        return ratingRepository.getReviewsById(tutorId);
     }
 }

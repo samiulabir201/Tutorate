@@ -1,9 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Chip, Rating} from "@mui/material";
 
-export const Reviews = () => {
+export const Reviews = (props) => {
     const [reviews, setReviews] = useState([]);
+
+    const getReviews = async () => {
+        const res = await fetch(`http://localhost:8080/tutor/review?tutorId=${props.id}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        const data = await res.json();
+        setReviews(data);
+    }
+
+    useEffect(async () => {
+        await getReviews();
+    }, [])
+
     return (
         <div className="ml-5 p-0 col-xl-8 flex flex-wrap"
              style={{maxHeight: window.innerHeight * 0.75, overflowY: "scroll", overflowX: "hidden"}}>
