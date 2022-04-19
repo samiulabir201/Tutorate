@@ -18,7 +18,7 @@ export const Reviews = (props) => {
 
     useEffect(async () => {
         await getReviews();
-    }, [])
+    }, [props.refetch])
 
     return (
         <div className="ml-5 p-0 col-xl-8 flex flex-wrap"

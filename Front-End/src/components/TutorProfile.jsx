@@ -15,6 +15,7 @@ export const TutorProfile = () => {
     const [image, setImage] = useState('/profile.png')
     const [formShown, setFormShown] = useState(false);
     const [profileDialogShow, setProfileDialogShow] = useState(false);
+    const [refetch, setRefetch] = useState(false);
 
     const getTutor = async () => {
         const res = await fetch(`http://localhost:8080/tutor/${id}`, {
@@ -23,6 +24,11 @@ export const TutorProfile = () => {
             headers: { 'Content-Type': 'application/json' },
         });
         setTutor(await res.json());
+    }
+
+    const handleRateFormClose = () => {
+        setFormShown(false);
+        setRefetch(!refetch);
     }
 
     useEffect(async () => {
@@ -51,7 +57,7 @@ export const TutorProfile = () => {
                         <i className="icon bi bi-pencil-square" />
                         &nbsp;Write a Review
                     </button>
-                    <RateForm show={formShown} onHide={() => setFormShown(false)} tutor_id={id}/>
+                    <RateForm show={formShown} onHide={handleRateFormClose} tutor_id={id}/>
                 </React.Fragment>
             );
         }
@@ -78,7 +84,7 @@ export const TutorProfile = () => {
                     </div>
                     {getButton()};
                 </div>
-                <Reviews id={id}/>
+                <Reviews refetch={refetch} id={id}/>
             </div>
         </div>
     );
