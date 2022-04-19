@@ -2,7 +2,7 @@
     width: 100px;
     height: 45px;
     border-radius: 10px;
-    background-color: #75BBCF;
+    background-color: #5EBCD7;
     font-size: 15px;
     font-weight: 600;
     color: white;
@@ -14,7 +14,7 @@
 }
 
 .profileBar:hover {
-    background-color: #066079;
+    background-color: #92CFE0;
 }
 
 .profileBar .icon {
