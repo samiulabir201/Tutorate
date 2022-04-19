@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {RateForm} from "./RateForm";
 import "../stylesheets/TutorProfile.css";
@@ -10,7 +10,7 @@ import {Reviews} from "./TutorReviews";
 
 export const TutorProfile = () => {
     let { id } = useParams();
-    const {user, setUser} = useStateContext();
+    const {user, setSearchTerm, setSearchParams, defaultParams} = useStateContext();
     const [tutor, setTutor] = useState({});
     const [image, setImage] = useState('/profile.png')
     const [formShown, setFormShown] = useState(false);
@@ -72,13 +72,26 @@ export const TutorProfile = () => {
                              className="mx-auto img-fluid rounded-circle mb-2" width="128" height="128" alt=""/>
                         <h4 className="mb-3 fw-bold fs-4 text-center">{tutor.name}</h4>
                         <Rating key={tutor.id} value={tutor.averageRating} readOnly precision={0.2}/>
-                        <p className="mb-2"><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>
+                        <Link to="/">
+                            <p className="mb-2" onClick={() => {
+                                setSearchTerm(tutor.location);
+                                setSearchParams({...defaultParams});
+                            }}><i className="bi bi-geo-alt"/>&nbsp;{tutor.location}</p>
+                        </Link>
                         <p className="mb-2"><i className="bi bi-telephone"/>&nbsp;{tutor.phone}</p>
                         {tutor.grades?.map((grade) => {
-                            return <Chip className="m-1" label={grade}/>
+                            return <Link to="/">
+                                <Chip className="m-1" label={grade} onClick={() => {
+                                    setSearchParams({...defaultParams, grades: [grade]});
+                                }}/>
+                            </Link>
                         })}
                         {tutor.subjects?.map((subject) => {
-                            return <Chip className="m-1" label={subject}/>
+                            return <Link to="/">
+                                <Chip className="m-1" label={subject} onClick={() => {
+                                    setSearchParams({...defaultParams, subjects: [subject]})
+                                }}/>
+                            </Link>
                         })}
                         <p className="mb-2"><i className="bi bi-cash-stack"/>&nbsp;BDT {tutor.min_wage}</p>
                     </div>
