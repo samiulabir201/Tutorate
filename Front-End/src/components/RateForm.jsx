@@ -13,24 +13,30 @@ export const RateForm = (props) => {
     const [clarity, setClarity] = useState(0);
     const [review, setReview] = useState("");
 
+    const handleClose = () => {
+        setPatience(0);
+        setPunctuality(0);
+        setEffectiveness(0);
+        setClarity(0);
+        props.onHide();
+    }
+
     const rateTutor = async (event) => {
         const rateParams = {effectiveness, clarity, patience, punctuality, review};
         event.preventDefault();
-
-        props.onHide();
-        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}`, {
+        handleClose();
+        await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(rateParams),
         });
-
     }
 
     return (
         <ReactModal
             isOpen={props.show}
-            onRequestClose={() => props.onHide()}
+            onRequestClose={handleClose}
             className="RateForm"
             overlayClassName="RateFormOverlay"
         >
