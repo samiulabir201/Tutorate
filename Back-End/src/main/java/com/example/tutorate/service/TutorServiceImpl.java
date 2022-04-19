@@ -28,7 +28,7 @@ public class TutorServiceImpl implements TutorService{
     public List<Tutor> getTutors(String searchTerm, SearchParams searchParams) {
         searchTerm = searchTerm.toLowerCase();
         List<Tutor> tutors = new ArrayList<>();
-        for (Tutor tutor: tutorRepository.findAll()) {
+        for (Tutor tutor: tutorRepository.findAllByOrderByAverageRatingDesc()) {
             if (!searchParams.filter(tutor))    continue;
 
             // search by name
