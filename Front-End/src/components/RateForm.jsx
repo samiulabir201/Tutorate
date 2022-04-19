@@ -75,6 +75,7 @@ export const RateForm = (props) => {
                 </Grid>
                 <div className="d-inline-flex mx-auto my-0">
                     <button className="button" type="submit">Submit</button>
+                    <button className="button" type="button" onClick={handleClose}>Cancel</button>
                 </div>
             </form>
         </ReactModal>
