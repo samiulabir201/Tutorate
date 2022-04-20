@@ -16,7 +16,7 @@ public class Message {
     private String receiverName;
     private  String message;
     private Status status;
-  
+
     public Message(){
 
     }
