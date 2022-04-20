@@ -21,27 +21,34 @@ export const TutorProfileForm = (props) => {
     const [image, setImage] = useState(null);
     const history = useHistory();
 
+    const handleClose = () => {
+        setImage(null);
+        props.onHide();
+    }
+
     const createProfile = async (event) => {
         event.preventDefault();
 
-        props.onHide();
+        const jsonData = JSON.stringify({name, location, phone, grades, subjects, "min_wage": wage});
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("tutor", new Blob([jsonData], {type: 'application/json'}));
+
+        handleClose();
         const res = await fetch(`http://localhost:8080/tutor/add`, {
             method: 'POST',
             credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({name, location, phone, grades, subjects, "min_wage": wage}),
+            body: formData,
         });
-        setUser(await res.json());
+        const modifiedUser = await(res.json());
+        setUser(modifiedUser);
+        if (modifiedUser.tutor != null) history.push("/" + modifiedUser.tutor.id);
     }
-
-    useEffect(() => {
-        if (user.tutor != null) history.push("/" + user.tutor.id);
-    }, [user]);
 
     return (
         <ReactModal
             isOpen={props.show}
-            onRequestClose={() => props.onHide()}
+            onRequestClose={handleClose}
             className="TutorProfileForm"
             overlayClassName="TutorProfileFormOverlay"
         >
@@ -49,7 +56,7 @@ export const TutorProfileForm = (props) => {
             <form onSubmit={createProfile} className="optionsContainer">
                 <Grid container spacing={4} alignItems="center">
                     <Grid item xs={6}>
-                        <ImageUpload image setImage={setImage}/>
+                        <ImageUpload image={image} setImage={setImage}/>
                     </Grid>
                     <Grid item xs={6}>
                         <Grid container spacing={4}>
@@ -83,7 +90,7 @@ export const TutorProfileForm = (props) => {
                 </Grid>
                 <div className="d-inline-flex mx-auto mt-3">
                     <button className="button" type="submit">Submit</button>
-                    <button className="button" type="button" onClick={() => props.onHide()}>Cancel</button>
+                    <button className="button" type="button" onClick={handleClose}>Cancel</button>
                 </div>
             </form>
         </ReactModal>

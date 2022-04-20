@@ -8,8 +8,10 @@ import com.example.tutorate.service.RatingService;
 import com.example.tutorate.service.TutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +31,16 @@ public class TutorController {
     @Autowired
     private RatingRepository ratingRepository;
 
-    @PostMapping("/add")
-    public User add(@RequestBody Tutor tutor, HttpServletRequest request) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public User add(@RequestPart("tutor") Tutor tutor, @RequestPart(value = "image", required = false) MultipartFile image, HttpServletRequest request) {
         String username = (String) request.getSession().getAttribute("User");
         User user = userRepository.findByUsername(username);
         user.setRole(Role.tutor);
+
+        String imagePath = tutorService.saveImage(image, user.getId());
+        tutor.setImage(imagePath);
+
         user.setTutor(tutor);
-        //tutorService.saveTutor(tutor);
         userRepository.save(user);
         return user;
     }
@@ -94,11 +99,17 @@ public class TutorController {
         return tutorRepository.getAllGrades().stream().distinct().collect(Collectors.toList());
     }
 
-    @GetMapping("/rate")
-    public float rate(@RequestParam int tutorId, @RequestParam ArrayList<Integer> ratingList, HttpServletRequest request) {
+    @PostMapping("/rate")
+    public float rate(@RequestParam int tutorId, @RequestBody TutorRating rateParams, HttpServletRequest request) {
 
-        ratingService.storeRating(tutorId, ratingList, request);
+        ratingService.storeRating(tutorId, rateParams, request);
         Tutor tutor = tutorRepository.findById(tutorId);
         return tutor.getAverageRating();
+    }
+
+    @GetMapping("/review")
+    public List<TutorRating> reviews(@RequestParam int tutorId) {
+
+        return ratingService.getReviews(tutorId);
     }
 }

@@ -30,7 +30,7 @@ export const ProfileBar = () => {
                     className="profileBar"
                     onClick={() => {setProfileDialogShow(true)}}>
                     <i className="icon bi bi-person-circle" />
-                    Profile
+                    Log In
                 </button>
                 <div>
                     <ProfileDialog

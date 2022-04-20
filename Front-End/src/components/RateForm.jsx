@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import "../stylesheets/RateForm.css";
 import Grid from "@mui/material/Grid";
 import {Ranking} from "./searchBar/Ranking";
-import {TextField} from "@mui/material";
+import {setRef, TextField} from "@mui/material";
 
 
 export const RateForm = (props) => {
@@ -11,24 +11,32 @@ export const RateForm = (props) => {
     const [punctuality, setPunctuality] = useState(0);
     const [effectiveness, setEffectiveness] = useState(0);
     const [clarity, setClarity] = useState(0);
+    const [review, setReview] = useState("");
+
+    const handleClose = () => {
+        setPatience(0);
+        setPunctuality(0);
+        setEffectiveness(0);
+        setClarity(0);
+        props.onHide();
+    }
 
     const rateTutor = async (event) => {
+        const rateParams = {effectiveness, clarity, patience, punctuality, review};
         event.preventDefault();
-
-        props.onHide();
-        const res = await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}&ratingList=${punctuality},${effectiveness},${clarity},
-        ${patience}`, {
-            method: 'GET',
+        handleClose();
+        await fetch(`http://localhost:8080/tutor/rate?tutorId=${props.tutor_id}`, {
+            method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(rateParams),
         });
-
     }
 
     return (
         <ReactModal
             isOpen={props.show}
-            onRequestClose={() => props.onHide()}
+            onRequestClose={handleClose}
             className="RateForm"
             overlayClassName="RateFormOverlay"
         >
@@ -61,11 +69,13 @@ export const RateForm = (props) => {
                     </Grid>
                     <Grid item xs={12}>
                         <p className="mb-2">Review:</p>
-                        <TextField className="mb-4" variant="outlined" multiline rows={4} fullWidth/>
+                        <TextField className="mb-4" variant="outlined" multiline rows={4} fullWidth
+                                   onChange={(event) => setReview(event.target.value)}/>
                     </Grid>
                 </Grid>
                 <div className="d-inline-flex mx-auto my-0">
                     <button className="button" type="submit">Submit</button>
+                    <button className="button" type="button" onClick={handleClose}>Cancel</button>
                 </div>
             </form>
         </ReactModal>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RatingServiceImpl implements RatingService{
@@ -36,13 +37,14 @@ public class RatingServiceImpl implements RatingService{
         return false;
     }
 
-    public void storeRating(int tutorId, ArrayList<Integer> ratingList, HttpServletRequest request) {
+    public void storeRating(int tutorId, TutorRating tutorRating, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = userRepository.findByUsername((String) session.getAttribute("User"));
 
         if(session.getAttribute("User") != null){
             Tutor tutor = tutorRepository.findById(tutorId);
-            TutorRating tutorRating = new TutorRating(user, tutor, ratingList);
+            tutorRating.setUser(user);
+            tutorRating.setTutor(tutor);
             tutorRating.calculateRate();
             ratingRepository.save(tutorRating);
 
@@ -53,5 +55,10 @@ public class RatingServiceImpl implements RatingService{
 
     public float calculateAverageRating(int id) {
         return   ratingRepository.getAverageRating(id);
+    }
+
+    public List<TutorRating> getReviews(int tutorId) {
+
+        return ratingRepository.getReviewsById(tutorId);
     }
 }

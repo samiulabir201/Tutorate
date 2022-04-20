@@ -16,7 +16,7 @@ export const Location = (props) => {
         freeSolo={props.allowNewValues}
         renderInput={(params) => <TextField {...params} label="Location" required/>}
         options={locations}
-        onChange={(event, value) => {props.onLocationChange(value)}}
+        onInputChange={(event, value) => {props.onLocationChange(value)}}
         fullWidth
     />
 }
