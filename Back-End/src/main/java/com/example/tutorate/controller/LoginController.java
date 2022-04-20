@@ -29,7 +29,10 @@ public class LoginController {
             session.setAttribute("User", user.getUsername());
             return userRepository.findByUsername(user.getUsername());
         }
-        else   return null;
+        else  {
+            User invalid = new User();
+            invalid.setPassword("invalid");
+            return invalid; }
     }
 
     @PostMapping("/register")
