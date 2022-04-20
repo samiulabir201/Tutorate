@@ -1,5 +1,7 @@
 package com.example.tutorate.model;
 
+import org.hibernate.mapping.Map;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Tutor {
     public void setImage(String image) {
         this.image = image;
     }
-
+    
     public Tutor() {}
 
     public int getId() {
