@@ -3,14 +3,18 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Results } from './Results';
 import { TutorProfile } from "./TutorProfile";
-
+import { ChatRoom } from "./ChatRoom"
 export const Routes = () => (
   <Switch>
     <Route exact path="/">
       <Results />
     </Route>
+    <Route exact path="/req">
+        <ChatRoom />
+    </Route>
       <Route path="/:id">
           <TutorProfile />
       </Route>
+    
   </Switch>
 );
